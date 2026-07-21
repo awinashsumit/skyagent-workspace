@@ -345,7 +345,7 @@
     .run-result { margin-top: var(--space-3); padding-top: var(--space-3); border-top: var(--stroke-thin) solid var(--border-subtle); font-size: var(--fs-2); color: var(--fg-low); }
     .run-result .rr-title { font-weight: var(--weight-medium); color: var(--fg-high); margin-bottom: var(--space-2); }
     /* Code home: usage stats */
-    .code-home { width: 100%; max-width: 720px; text-align: left; }
+    .code-home { width: 100%; max-width: 600px; text-align: left; }
     .stats-card { background: var(--color-surface); box-shadow: inset 0 0 0 1px var(--border-subtle); border-radius: var(--radius-4); padding: var(--space-4); }
     .stats-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-4); }
     .seg-range { display: inline-flex; background: var(--gray-3); border-radius: var(--radius-3); padding: 3px; gap: 2px; flex: none; }
@@ -354,9 +354,9 @@
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3) var(--space-4); }
     @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
     .stat-cell .sc-label { font-size: var(--fs-1); color: var(--fg-low); }
-    .stat-cell .sc-value { font-size: var(--fs-5); line-height: 1.1; font-weight: var(--weight-bold); color: var(--fg-high); margin-top: 3px; font-variant-numeric: tabular-nums; }
-    .heatmap { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 1fr); gap: 3px; margin-top: var(--space-5); }
-    .heat-cell { width: 100%; aspect-ratio: 1; border-radius: 2px; background: var(--gray-3); }
+    .stat-cell .sc-value { font-size: var(--fs-4); line-height: 1.1; font-weight: var(--weight-bold); color: var(--fg-high); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .heatmap { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 12px); grid-auto-columns: 12px; gap: 3px; margin-top: var(--space-4); justify-content: start; }
+    .heat-cell { width: 12px; height: 12px; border-radius: 2px; background: var(--gray-3); }
     .heat-cell.l1 { background: var(--accent-4); }
     .heat-cell.l2 { background: var(--accent-6); }
     .heat-cell.l3 { background: var(--accent-8); }
@@ -521,10 +521,11 @@
 
     /* composer popovers (open upward from the action row) */
     .menu-anchor { position: relative; display: inline-flex; }
-    .mode-menu, .plus-menu { position: absolute; bottom: calc(100% + 8px); left: 0; z-index: 70; }
+    .mode-menu, .plus-menu, .model-menu-p { position: absolute; bottom: calc(100% + 8px); left: 0; z-index: 70; }
     .mode-menu { width: 230px; padding: var(--space-1); }
     .plus-menu { width: 232px; padding: var(--space-1); }
-    .mode-menu[hidden], .plus-menu[hidden] { display: none; }
+    .model-menu-p { width: 220px; padding: var(--space-1); }
+    .mode-menu[hidden], .plus-menu[hidden], .model-menu-p[hidden] { display: none; }
     .menu-label { font-size: var(--fs-1); color: var(--fg-subtle); padding: var(--space-1) var(--space-2) var(--space-1); }
     .mode-item { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border-radius: var(--radius-2); cursor: pointer; }
     .mode-item:hover { background: var(--gray-3); }
@@ -1672,11 +1673,7 @@
               <span class="search-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></svg></span>
               <input class="input" placeholder="Search chats..." data-recents-search aria-label="Search chats" />
             </div>
-            <div class="tab-nav" style="margin-bottom:var(--space-2);">
-              <a class="tab-nav-item is-active" href="#">Active</a>
-              <a class="tab-nav-item" href="#">Done</a>
-            </div>
-            <div id="wsRecents" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;flex:1;min-height:0;">
+            <div id="wsRecents" style="display:flex;flex-direction:column;gap:1px;overflow-y:auto;flex:1;min-height:0;margin-top:var(--space-2);">
               <div class="list-group">Today</div>
               <a class="chat-row is-active" href="#"><span class="cr-dot is-live"></span><span class="cr-title">Give me my morning briefing</span><button class="cr-menu" aria-label="More"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></a>
               <a class="chat-row" href="#"><span class="cr-dot is-done"></span><span class="cr-title">Draft Q3 occupancy recovery plan</span><button class="cr-menu" aria-label="More"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></a>
