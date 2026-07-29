@@ -3,10 +3,16 @@
 A front-end prototype of the **skyAgent Workspace** for Skypoint's skyCommand, reworked into a
 Claude-app-style multi-mode experience (**Chat / Cowork / Code**) in the Radix design system.
 
-**▶ Live preview:** https://awinashsumit.github.io/skyagent-workspace/
+**▶ Live preview (desktop):** https://awinashsumit.github.io/skyagent-workspace/
 
 Open it, click **Workspace** in the left sidebar, then the **⤢ full-screen** icon (top-left of the
 workspace rail) for the immersive experience.
+
+**▶ Live preview (mobile):** https://awinashsumit.github.io/skyagent-workspace/mobile.html
+
+A standalone, native-app-style phone build of the Workspace — top app bar + slide-in drawer, bottom-sheet
+model / approval / project pickers, sticky composer, simulated streaming and Cowork runs. Best on a phone
+(or a narrow browser window); on desktop it renders inside a phone frame.
 
 ## Try this (demo path)
 - Switch modes: **Chat · Cowork · Code** — each has its own home
