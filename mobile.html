@@ -31,13 +31,41 @@
     :focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: var(--radius-2); }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
+    /* ---- Dark mode: real elevation + contrast (mobile-scoped) ----
+       Page canvas is deep gray-1; raised UI (composer box, cards, sheets,
+       drawer, pills) uses gray-3 surface, so everything reads as layered.
+       Borders bumped for visibility; selected/active states go neutral-raised
+       instead of muddy amber; the segmented toggle regains contrast. */
+    :root[data-theme="dark"] {
+      --color-page: #0f0f0f;          /* canvas, one step below surface */
+      --color-surface: #1e1e1e;       /* raised controls */
+      --border-subtle: #333333;       /* visible card/separator edge */
+      --border-ui: #454545;           /* visible interactive edge */
+      --border-strong: #5a5a5a;
+      --fg-subtle: #909090;           /* tertiary text -> AA on the dark canvas */
+    }
+    html[data-theme="dark"] .composer-box { background: #1e1e1e; box-shadow: none; }
+    html[data-theme="dark"] .composer-modes { background: #101010; }
+    html[data-theme="dark"] .cmode.is-active { background: #333333; box-shadow: none; }
+    html[data-theme="dark"] .m-recent.is-active { background: #262626; }
+    html[data-theme="dark"] .m-recent:active,
+    html[data-theme="dark"] .m-navlink:active,
+    html[data-theme="dark"] .sheet-item:active,
+    html[data-theme="dark"] .m-iconbtn:active,
+    html[data-theme="dark"] .ca-icon:active,
+    html[data-theme="dark"] .model-chip:active { background: #2a2a2a; }
+    html[data-theme="dark"] .user-turn { background: #2a2a2a; border-color: #3a3a3a; }
+    html[data-theme="dark"] .art-card { background: #242424; }
+    html[data-theme="dark"] .m-drawer { background: #171717; }
+    html[data-theme="dark"] .m-sheet { background: #1e1e1e; }
+
     /* ---- App shell: phone-framed on desktop, full-bleed on real phones ---- */
     .device {
       position: relative;
       width: 100%; max-width: 420px; margin: 0 auto;
       height: 100dvh; min-height: 100dvh;
       display: flex; flex-direction: column;
-      background: var(--color-surface);
+      background: var(--color-page);
       overflow: clip;
     }
     @media (min-width: 480px) {
@@ -52,7 +80,7 @@
       height: 52px; padding: 0 var(--space-2);
       padding-top: env(safe-area-inset-top);
       height: calc(52px + env(safe-area-inset-top));
-      background: var(--color-surface);
+      background: transparent;
       z-index: 30;
     }
     .m-iconbtn {
@@ -267,7 +295,7 @@
     /* ============ COMPOSER (sticky bottom) ============ */
     .m-composer {
       flex: 0 0 auto;
-      background: var(--color-surface);
+      background: transparent;
       padding: var(--space-2) var(--space-3);
       padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
     }
