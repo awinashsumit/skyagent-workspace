@@ -326,7 +326,7 @@
     .skill-item .sk-desc { display: block; font-size: var(--fs-1); color: var(--fg-low); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 1px; }
     .skills-empty { padding: var(--space-3); font-size: var(--fs-1); color: var(--fg-subtle); text-align: center; }
     /* Cowork suggestions */
-    .cowork-suggest { width: 100%; max-width: 640px; text-align: left; }
+    .cowork-suggest { width: 100%; max-width: 740px; text-align: left; }
     .cowork-suggest .cs-label { font-size: var(--fs-1); text-transform: uppercase; letter-spacing: .05em; color: var(--fg-subtle); font-weight: var(--weight-medium); margin-bottom: var(--space-2); }
     .suggest-list { display: flex; flex-direction: column; gap: var(--space-2); }
     .suggest-card { display: flex; align-items: center; gap: var(--space-3); width: 100%; text-align: left; border: 0; background: var(--color-surface); box-shadow: inset 0 0 0 1px var(--border-subtle); border-radius: var(--radius-3); padding: var(--space-3); cursor: pointer; font-family: var(--font-base); }
@@ -571,9 +571,10 @@
     .model-menu-p { width: 220px; padding: var(--space-1); }
     .mode-menu[hidden], .plus-menu[hidden], .model-menu-p[hidden] { display: none; }
     .menu-label { font-size: var(--fs-1); color: var(--fg-subtle); padding: var(--space-1) var(--space-2) var(--space-1); }
-    .mode-item { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border-radius: var(--radius-2); cursor: pointer; }
+    .mode-item { display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-2); border: 0; background: transparent; border-radius: var(--radius-2); cursor: pointer; text-align: left; font-family: var(--font-base); }
     .mode-item:hover { background: var(--gray-3); }
-    .mode-item.is-selected { background: var(--accent-3); }
+    .mode-item.is-selected { background: transparent; }
+    .mode-item.is-selected:hover { background: var(--gray-3); }
     .mode-item .mi-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
     .mode-item .mi-title { font-size: var(--fs-2); font-weight: var(--weight-medium); color: var(--fg-high); }
     .mode-item .mi-sub { font-size: var(--fs-1); color: var(--fg-low); }
