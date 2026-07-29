@@ -259,9 +259,21 @@
     .ws-panel-empty .pe-art { width: 56px; height: 56px; border-radius: var(--radius-4); background: var(--gray-3); color: var(--fg-subtle); display: inline-flex; align-items: center; justify-content: center; }
     .ws-panel-empty .pe-title { font-size: var(--fs-3); font-weight: var(--weight-medium); color: var(--fg-high); }
     .ws-panel-empty .pe-sub { font-size: var(--fs-1); color: var(--fg-low); max-width: 200px; }
-    .ws-empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); padding: var(--space-5); text-align: center; }
+    .ws-empty { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-5); padding: var(--space-5); text-align: center; }
     .ws-empty .empty-brand { display: flex; align-items: center; gap: var(--space-2); }
     .ws-empty .empty-title { font-size: var(--fs-5); line-height: var(--lh-5); font-weight: var(--weight-bold); }
+    /* centered home (greeting + composer + pills) */
+    .home-greet { display: inline-flex; align-items: center; gap: var(--space-3); }
+    .home-greet .home-spark { width: 32px; height: 32px; flex: none; }
+    .home-greet .empty-title { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.1; letter-spacing: -0.02em; }
+    .empty-composer-slot { width: 100%; max-width: 740px; }
+    .empty-composer-slot:empty { display: none; }
+    .empty-composer-slot .ws-composer { padding: 0; }
+    .home-pills { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-2); }
+    .home-pill { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 15px; border: 0; background: var(--color-surface); box-shadow: inset 0 0 0 1px var(--border-subtle); border-radius: var(--radius-full); cursor: pointer; font-family: var(--font-base); font-size: var(--fs-2); font-weight: var(--weight-medium); color: var(--fg-high); }
+    .home-pill:hover { background: var(--gray-2); box-shadow: inset 0 0 0 1px var(--accent-8); }
+    .home-pill svg { width: 16px; height: 16px; color: var(--fg-low); }
+    .home-pill:focus-visible { outline: 2px solid var(--accent-8); outline-offset: 1px; }
     .ws-empty .empty-sub { font-size: var(--fs-2); color: var(--fg-low); max-width: 400px; }
 
     /* ===== Workspace P0: immersive full-screen + mode switch + streaming ===== */
@@ -1829,15 +1841,19 @@
             </div>
 
             <div class="ws-empty">
-              <div class="empty-brand">
-                <svg class="sa-logo-lg" viewBox="0 0 256 84" role="img" aria-label="skyAgent"><use href="#sa-wordmark"/></svg>
-              </div>
-              <div>
-                <div class="empty-title">Let's get something done</div>
-                <div class="empty-sub" style="margin-top:var(--space-2);">Tell me what you need, or pick a command below. I'll handle the work.</div>
+              <div class="home-greet"><svg class="home-spark" viewBox="0 0 82 84" aria-hidden="true"><use href="#sa-mark"/></svg> <span class="empty-title">Hey there, Sumit Awinash</span></div>
+              <div class="empty-sub" hidden></div>
+              <div class="empty-composer-slot"></div>
+
+              <div class="home-pills" data-empty-mode="chat">
+                <button class="home-pill" data-pill="Give me my morning briefing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Briefing</button>
+                <button class="home-pill" data-pill="Build a portfolio report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg> Report</button>
+                <button class="home-pill" data-pill="Analyze a KPI or trend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg> Analyze</button>
+                <button class="home-pill" data-pill="Research "><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> Research</button>
+                <button class="home-pill" data-pill="Surprise me — what should I look at today?"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> skyAgent's choice</button>
               </div>
 
-              <div data-empty-mode="chat">
+              <div hidden data-dead>
               <div class="cmd-grid">
                 <button class="cmd-card" data-open-task><span class="cc-head"><span class="cc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /> <path d="M12 2v2" /> <path d="M12 20v2" /> <path d="m4.93 4.93 1.41 1.41" /> <path d="m17.66 17.66 1.41 1.41" /> <path d="M2 12h2" /> <path d="M20 12h2" /> <path d="m6.34 17.66-1.41 1.41" /> <path d="m19.07 4.93-1.41 1.41" /></svg></span><span class="cc-name">/briefing</span></span><span class="cc-desc">Daily priorities & key metrics</span></button>
                 <button class="cmd-card" data-open-task><span class="cc-head"><span class="cc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /></svg></span><span class="cc-name">/report</span></span><span class="cc-desc">Build a PPTX or PDF report</span></button>
@@ -1898,13 +1914,6 @@
                 </div>
               </div>
 
-              <div class="empty-status">
-                <span><span class="dot"></span>1 active task</span>
-                <span class="sep">&middot;</span>
-                <span>No alerts</span>
-                <span class="sep">&middot;</span>
-                <span>No recent work</span>
-              </div>
             </div>
 
             <div class="ws-composer">
@@ -3247,7 +3256,7 @@
           row.classList.add('is-active');
           var key = row.getAttribute('data-conv');
           if (key && CONVOS[key] && thread){
-            ws3.classList.remove('is-empty');
+            ws3.classList.remove('is-empty'); placeComposer(false);
             thread.innerHTML = CONVOS[key];
             var cvht = wsView.querySelector('.cvh-t'); if (cvht && cvht.firstChild) cvht.firstChild.nodeValue = row.querySelector('.cr-title').textContent + ' ';
             thread.scrollTop = 0;
@@ -3287,6 +3296,18 @@
         }
         wsView.querySelectorAll('[data-cmode]').forEach(function(b){ b.addEventListener('click', function(){ applyMode(b.dataset.cmode); }); });
         applyMode('chat');
+
+        // --- centered home: composer sits under the greeting when empty, at the bottom when active ---
+        var wsConvoEl = wsView.querySelector('.ws-convo');
+        var emptySlot = wsView.querySelector('.empty-composer-slot');
+        var composerEl = wsView.querySelector('.ws-composer');
+        function placeComposer(empty){ if (!composerEl) return; if (empty){ if (emptySlot) emptySlot.appendChild(composerEl); } else if (wsConvoEl) { wsConvoEl.appendChild(composerEl); } }
+        // open the workspace on the home (empty) state
+        ws3.classList.add('is-empty');
+        wsView.querySelectorAll('#wsRecents .chat-row').forEach(function(r){ r.classList.remove('is-active'); });
+        placeComposer(true);
+        // suggestion pills prefill the composer
+        wsView.querySelectorAll('.home-pill').forEach(function(p){ p.addEventListener('click', function(){ if (input){ input.value = p.dataset.pill; input.focus(); } }); });
 
         // mic + voice affordances
         var micBtn = wsView.querySelector('[data-mic]');
@@ -3378,7 +3399,7 @@
           group.insertAdjacentElement('afterend', a);
         }
         function runTask(title){
-          ws3.classList.remove('is-empty');
+          ws3.classList.remove('is-empty'); placeComposer(false);
           addRecent(title); startChatPanel();
           var STEPS = ['Understanding the request','Querying skyCommand data','Analyzing communities & drivers','Drafting the work product','Generating report artifact'];
           var card = document.createElement('div'); card.className = 'run-card';
@@ -3428,7 +3449,7 @@
         function send(){
           if (!input) return; var text = input.value.trim(); if (!text) return;
           if (currentMode() === 'cowork'){ input.value = ''; input.style.height = 'auto'; if (skillsMenu) skillsMenu.hidden = true; runTask(text); return; }
-          ws3.classList.remove('is-empty');
+          ws3.classList.remove('is-empty'); placeComposer(false);
           addRecent(text); startChatPanel();
           var u = document.createElement('div'); u.className = 'msg-user';
           u.innerHTML = '<span class="mu-text"></span><button class="msg-edit" aria-label="Edit and resend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Edit</button>';
@@ -3449,7 +3470,7 @@
 
         // New chat/task/session starts a fresh thread
         var primaryEl = wsView.querySelector('[data-ws-primary]');
-        if (primaryEl) primaryEl.addEventListener('click', function(){ clearInterval(streamTimer); clearTimeout(runTimer); setStreaming(false); if (thread) thread.innerHTML = ''; if (input){ input.value = ''; input.focus(); } panelUserClosed = false; setPanel(false); });
+        if (primaryEl) primaryEl.addEventListener('click', function(){ clearInterval(streamTimer); clearTimeout(runTimer); setStreaming(false); if (thread) thread.innerHTML = ''; ws3.classList.add('is-empty'); placeComposer(true); wsView.querySelectorAll('#wsRecents .chat-row').forEach(function(r){ r.classList.remove('is-active'); }); if (input){ input.value = ''; input.focus(); } panelUserClosed = false; setPanel(false); });
 
         // Cowork suggested tasks → delegate a live run
         wsView.querySelectorAll('[data-run-task]').forEach(function(c){ c.addEventListener('click', function(){ runTask(c.getAttribute('data-run-task')); }); });
