@@ -300,7 +300,8 @@
     /* model + effort chip in composer */
     .model-chip { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 8px; border: 0; background: transparent; color: var(--fg-low); font-family: var(--font-base); font-size: var(--fs-1); font-weight: var(--weight-medium); border-radius: var(--radius-3); cursor: pointer; }
     .model-chip:hover { background: var(--gray-3); color: var(--fg-high); }
-    .model-chip .eff { color: var(--fg-low); }
+    .model-chip .mdl-model, .model-chip .eff { color: var(--fg-low); }
+    .model-chip .mdl-model::before, .model-chip .eff::before { content: "·"; margin-right: 5px; color: var(--fg-subtle); }
     .model-menu-p .menu-label { font-size: var(--fs-1); color: var(--fg-subtle); padding: var(--space-1) var(--space-2); }
     /* streaming */
     .stream-caret { display: inline-block; width: 7px; height: 1em; vertical-align: text-bottom; background: var(--accent-9); border-radius: 1px; margin-left: 2px; animation: caretBlink 1s steps(2) infinite; }
@@ -1935,11 +1936,11 @@
                   </div>
                   <span class="spacer"></span>
                   <span class="menu-anchor">
-                    <button class="model-chip" data-model-toggle aria-haspopup="true" aria-expanded="false"><span class="mdl">skyAgent Pro</span> <span class="eff">High</span> <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
+                    <button class="model-chip" data-model-toggle aria-haspopup="true" aria-expanded="false"><span class="mdl">skyAgent Pro</span> <span class="mdl-model">Sonnet</span> <span class="eff">High</span> <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
                     <div class="popover model-menu-p" hidden style="min-width:220px;">
                       <div class="menu-label">Model</div>
-                      <div class="mode-item is-selected" data-model="skyAgent Pro"><span class="mi-body"><span class="mi-title">skyAgent Pro</span> <span class="mi-sub">Deepest reasoning</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
-                      <div class="mode-item" data-model="skyAgent Fast"><span class="mi-body"><span class="mi-title">skyAgent Fast</span> <span class="mi-sub">Quicker, lighter</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
+                      <div class="mode-item is-selected" data-model="skyAgent Pro" data-short="Sonnet"><span class="mi-body"><span class="mi-title">skyAgent Pro</span> <span class="mi-sub">Claude Sonnet 4.5 (Bedrock)</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
+                      <div class="mode-item" data-model="skyAgent Fast" data-short="Haiku"><span class="mi-body"><span class="mi-title">skyAgent Fast</span> <span class="mi-sub">Claude Haiku 4.5 (Bedrock)</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
                       <div class="menu-label" style="margin-top:var(--space-1);">Effort</div>
                       <div class="mode-item is-selected" data-eff="High"><span class="mi-body"><span class="mi-title">High</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
                       <div class="mode-item" data-eff="Medium"><span class="mi-body"><span class="mi-title">Medium</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
@@ -3353,6 +3354,8 @@
           modelMenu.querySelectorAll('[data-model]').forEach(function(it){ it.addEventListener('click', function(){
             modelMenu.querySelectorAll('[data-model]').forEach(function(x){ x.classList.remove('is-selected'); }); it.classList.add('is-selected');
             modelBtn.querySelector('.mdl').textContent = it.dataset.model;
+            var mmEl = modelBtn.querySelector('.mdl-model'); if (mmEl) mmEl.textContent = it.dataset.short;
+            try { localStorage.setItem('skycmd.ws.model', it.dataset.model); localStorage.setItem('skycmd.ws.modelShort', it.dataset.short); } catch (e) {}
           }); });
           modelMenu.querySelectorAll('[data-eff]').forEach(function(it){ it.addEventListener('click', function(){
             modelMenu.querySelectorAll('[data-eff]').forEach(function(x){ x.classList.remove('is-selected'); }); it.classList.add('is-selected');
@@ -3719,7 +3722,7 @@
 
         // --- persistence: restore last-used mode; restore full-screen when entering the workspace ---
         try { var savedMode = localStorage.getItem('skycmd.ws.mode'); if (savedMode && MODE_CFG[savedMode]) applyMode(savedMode); } catch (e) {}
-        try { var savedModel = localStorage.getItem('skycmd.ws.model'); if (savedModel && modelBtn) modelBtn.querySelector('.mdl').textContent = savedModel; } catch (e) {}
+        try { var savedModel = localStorage.getItem('skycmd.ws.model'); if (savedModel && modelBtn){ modelBtn.querySelector('.mdl').textContent = savedModel; var ss = localStorage.getItem('skycmd.ws.modelShort') || (savedModel === 'skyAgent Fast' ? 'Haiku' : 'Sonnet'); var mmEl2 = modelBtn.querySelector('.mdl-model'); if (mmEl2) mmEl2.textContent = ss; } } catch (e) {}
         var wsNav = document.querySelector('.app-sidebar .nav-item[data-view="view-workspace"]');
         if (wsNav) wsNav.addEventListener('click', function(){ try { if (localStorage.getItem('skycmd.ws.fs') === '1') shell.classList.add('ws-immersive'); } catch (e) {} });
       })();
