@@ -550,7 +550,7 @@
     .composer-cowork { flex-wrap: wrap; }
     .usage-note svg { width: 13px; height: 13px; color: var(--accent-11); }
     /* project + approval menus (drop down from the cowork chips) */
-    .project-menu, .approval-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 70; padding: var(--space-1); min-width: 240px; box-shadow: var(--shadow-4), inset 0 0 0 1px var(--border-subtle); }
+    .project-menu, .approval-menu { position: absolute; left: 0; z-index: 70; padding: var(--space-1); min-width: 240px; overflow-y: auto; box-shadow: var(--shadow-4), inset 0 0 0 1px var(--border-subtle); }
     .project-menu[hidden], .approval-menu[hidden] { display: none; }
     .pm-search { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border-bottom: var(--stroke-thin) solid var(--border-subtle); margin-bottom: var(--space-1); }
     .pm-search svg { width: 15px; height: 15px; color: var(--fg-subtle); flex: none; }
@@ -565,7 +565,7 @@
 
     /* composer popovers (open upward from the action row) */
     .menu-anchor { position: relative; display: inline-flex; }
-    .mode-menu, .plus-menu, .model-menu-p { position: absolute; bottom: calc(100% + 8px); left: 0; z-index: 70; }
+    .mode-menu, .plus-menu, .model-menu-p { position: absolute; left: 0; z-index: 70; overflow-y: auto; }
     .mode-menu { width: 230px; padding: var(--space-1); }
     .plus-menu { width: 232px; padding: var(--space-1); }
     .model-menu-p { width: 220px; padding: var(--space-1); }
@@ -3169,6 +3169,15 @@
       var modeMenu = document.querySelector('.mode-menu');
       var plusBtn = document.querySelector('[data-plus-toggle]');
       var plusMenu = document.querySelector('.plus-menu');
+      // open a composer dropdown in whichever direction has room, and cap its height
+      function flipMenu(btn, menu){
+        if (!btn || !menu) return;
+        menu.style.top = ''; menu.style.bottom = ''; menu.style.maxHeight = '';
+        var r = btn.getBoundingClientRect();
+        var below = window.innerHeight - r.bottom - 12, above = r.top - 12, h = menu.scrollHeight;
+        if (below >= Math.min(h, 340) || below >= above){ menu.style.top = 'calc(100% + 6px)'; menu.style.maxHeight = Math.max(160, Math.min(360, below)) + 'px'; }
+        else { menu.style.bottom = 'calc(100% + 6px)'; menu.style.maxHeight = Math.max(160, Math.min(360, above)) + 'px'; }
+      }
       function closeComposerMenus(except){
         if (modeMenu && except !== 'mode') { modeMenu.hidden = true; if (modeBtn) modeBtn.setAttribute('aria-expanded','false'); }
         if (plusMenu && except !== 'plus') { plusMenu.hidden = true; if (plusBtn) plusBtn.setAttribute('aria-expanded','false'); }
@@ -3177,7 +3186,7 @@
         e.stopPropagation(); var open = modeMenu.hidden; closeComposerMenus('mode'); modeMenu.hidden = !open; modeBtn.setAttribute('aria-expanded', String(open));
       });
       if (plusBtn && plusMenu) plusBtn.addEventListener('click', function(e){
-        e.stopPropagation(); var open = plusMenu.hidden; closeComposerMenus('plus'); plusMenu.hidden = !open; plusBtn.setAttribute('aria-expanded', String(open));
+        e.stopPropagation(); var open = plusMenu.hidden; closeComposerMenus('plus'); plusMenu.hidden = !open; plusBtn.setAttribute('aria-expanded', String(open)); if (!plusMenu.hidden) flipMenu(plusBtn, plusMenu);
       });
       [modeMenu, plusMenu].forEach(function(m){ if (m) m.addEventListener('click', function(e){ e.stopPropagation(); }); });
       document.querySelectorAll('.mode-menu .mode-item').forEach(function(item){ item.addEventListener('click', function(){
@@ -3319,7 +3328,7 @@
         // Cowork: project + approval dropdowns
         (function(){
           function bindMenu(btnSel, menuSel){ var btn = wsView.querySelector(btnSel), menu = wsView.querySelector(menuSel); if (!btn || !menu) return null;
-            btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.hidden; wsView.querySelectorAll('.project-menu, .approval-menu').forEach(function(m){ m.hidden = true; }); menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); });
+            btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.hidden; wsView.querySelectorAll('.project-menu, .approval-menu').forEach(function(m){ m.hidden = true; }); menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); if (!menu.hidden) flipMenu(btn, menu); });
             menu.addEventListener('click', function(e){ e.stopPropagation(); }); return { btn: btn, menu: menu }; }
           var pj = bindMenu('[data-project-toggle]', '.project-menu');
           var ap = bindMenu('[data-approval-toggle]', '.approval-menu');
@@ -3339,7 +3348,7 @@
         var modelBtn = wsView.querySelector('[data-model-toggle]');
         var modelMenu = wsView.querySelector('.model-menu-p');
         if (modelBtn && modelMenu){
-          modelBtn.addEventListener('click', function(e){ e.stopPropagation(); var open = modelMenu.hidden; closeComposerMenus(); modelMenu.hidden = !open; modelBtn.setAttribute('aria-expanded', String(open)); });
+          modelBtn.addEventListener('click', function(e){ e.stopPropagation(); var open = modelMenu.hidden; closeComposerMenus(); modelMenu.hidden = !open; modelBtn.setAttribute('aria-expanded', String(open)); if (!modelMenu.hidden) flipMenu(modelBtn, modelMenu); });
           modelMenu.addEventListener('click', function(e){ e.stopPropagation(); });
           modelMenu.querySelectorAll('[data-model]').forEach(function(it){ it.addEventListener('click', function(){
             modelMenu.querySelectorAll('[data-model]').forEach(function(x){ x.classList.remove('is-selected'); }); it.classList.add('is-selected');
