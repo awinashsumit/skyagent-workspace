@@ -518,6 +518,36 @@
     .composer-actions { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
     .composer-actions .spacer { flex: 1; }
     .composer-hint { text-align: center; font-size: var(--fs-1); color: var(--fg-subtle); margin-top: var(--space-2); }
+    /* composer mode toggle (Chat / Cowork) */
+    .composer-modes { display: inline-flex; background: var(--gray-3); border-radius: var(--radius-3); padding: 3px; gap: 2px; }
+    .composer-modes .cmode { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 12px; border: 0; background: transparent; color: var(--fg-low); font-family: var(--font-base); font-size: var(--fs-1); font-weight: var(--weight-medium); border-radius: var(--radius-2); cursor: pointer; }
+    .composer-modes .cmode svg { width: 14px; height: 14px; }
+    .composer-modes .cmode:hover:not(.is-active) { color: var(--fg-high); }
+    .composer-modes .cmode.is-active { background: var(--color-panel-solid); color: var(--fg-high); box-shadow: var(--shadow-2); }
+    .composer-modes .cmode:focus-visible { outline: 2px solid var(--accent-8); outline-offset: 1px; }
+    /* Cowork second row (Project + approval + usage) */
+    .composer-cowork { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-1) 0; }
+    .composer-cowork[hidden] { display: none; }
+    .cw-chip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px; border: 0; background: transparent; color: var(--fg-low); font-family: var(--font-base); font-size: var(--fs-1); font-weight: var(--weight-medium); border-radius: var(--radius-3); cursor: pointer; box-shadow: inset 0 0 0 1px var(--border-subtle); }
+    .cw-chip:hover { background: var(--gray-3); color: var(--fg-high); }
+    .cw-chip svg { width: 14px; height: 14px; }
+    .cw-chip .cw-chev { width: 12px; height: 12px; color: var(--fg-subtle); }
+    .cw-chip:focus-visible { outline: 2px solid var(--accent-8); outline-offset: 1px; }
+    .usage-note { display: inline-flex; align-items: center; gap: 5px; font-size: var(--fs-1); color: var(--fg-subtle); white-space: nowrap; }
+    .cw-chip { flex: none; white-space: nowrap; }
+    .composer-cowork { flex-wrap: wrap; }
+    .usage-note svg { width: 13px; height: 13px; color: var(--accent-11); }
+    /* project + approval menus (drop down from the cowork chips) */
+    .project-menu, .approval-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 70; padding: var(--space-1); min-width: 240px; box-shadow: var(--shadow-4), inset 0 0 0 1px var(--border-subtle); }
+    .project-menu[hidden], .approval-menu[hidden] { display: none; }
+    .pm-search { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border-bottom: var(--stroke-thin) solid var(--border-subtle); margin-bottom: var(--space-1); }
+    .pm-search svg { width: 15px; height: 15px; color: var(--fg-subtle); flex: none; }
+    .pm-search input { flex: 1; border: 0; background: transparent; outline: none; font-family: var(--font-base); font-size: var(--fs-2); color: var(--fg-high); }
+    .pm-item { display: flex; align-items: center; gap: var(--space-2); width: 100%; text-align: left; border: 0; background: transparent; padding: var(--space-2); border-radius: var(--radius-2); cursor: pointer; font-family: var(--font-base); font-size: var(--fs-2); color: var(--fg-high); }
+    .pm-item:hover { background: var(--gray-3); }
+    .pm-item svg { width: 15px; height: 15px; color: var(--fg-subtle); flex: none; }
+    .approval-menu .ap-ic { display: inline-flex; flex: none; }
+    .approval-menu .ap-ic svg { width: 16px; height: 16px; color: var(--fg-low); }
     .exec-chip { display: inline-flex; align-items: center; gap: var(--space-1); height: 28px; padding: 0 var(--space-2); border: 0; border-radius: var(--radius-2); background: var(--gray-3); color: var(--accent-11); font-family: var(--font-base); font-size: var(--fs-1); font-weight: var(--weight-medium); cursor: pointer; }
     .exec-chip:hover { background: var(--gray-4); }
 
@@ -1691,11 +1721,6 @@
                 <span class="ic-out"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6v6" /> <path d="M20 10h-6V4" /> <path d="M14 10 21 3" /> <path d="M3 21l7-7" /></svg></span>
               </button>
             </div>
-            <div class="ws-modes" role="tablist" aria-label="Workspace mode">
-              <button class="ws-mode is-active" role="tab" aria-selected="true" data-ws-mode="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg> Chat</button>
-              <button class="ws-mode" role="tab" aria-selected="false" data-ws-mode="cowork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4" /> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg> Cowork</button>
-              <button class="ws-mode" role="tab" aria-selected="false" data-ws-mode="code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6" /> <path d="m8 6-6 6 6 6" /></svg> Code</button>
-            </div>
             <button class="btn btn-solid" data-new-task data-ws-primary style="justify-content:center;"><svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /> <path d="M12 5v14" /></svg> <span class="lbl">New chat</span></button>
             <nav class="ws-rail-links" id="wsRailLinks" aria-label="Workspace sections"></nav>
             <div class="search" style="width:100%;">
@@ -1884,42 +1909,21 @@
 
             <div class="ws-composer">
               <div class="composer-box">
-                <div class="composer-scope" data-scope-row hidden>
-                  <button class="scope-chip is-active" data-scope="local"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2" /><line x1="8" x2="16" y1="21" y2="21" /><line x1="12" x2="12" y1="17" y2="21" /></svg> Local</button>
-                  <button class="scope-chip" data-scope="website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></svg> Website</button>
-                  <button class="scope-chip" data-scope="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg> Add source</button>
-                  <span class="scope-sep"></span>
-                  <button class="ae-chip" data-ae-cycle aria-label="Autonomy mode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> <span class="ae-label">Accept edits</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
-                </div>
-                <textarea rows="1" data-ws-input placeholder="Let's knock something off your list... (type / for commands)"></textarea>
+                <textarea rows="1" data-ws-input placeholder="How can I help you today?"></textarea>
                 <div class="popover skills-menu" id="wsSkills" hidden role="listbox" aria-label="Skills"></div>
                 <div class="composer-actions">
                   <span class="menu-anchor">
-                    <button class="exec-chip" data-mode-toggle aria-haspopup="true" aria-expanded="false">
-                      <span class="ec-label">Execute</span>
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
-                    </button>
-                    <div class="popover mode-menu" hidden>
-                      <div class="menu-label">Switch modes</div>
-                      <div class="mode-item is-selected" data-mode="Execute">
-                        <span class="mi-body"><span class="mi-title">Execute</span> <span class="mi-sub">Take action, do the work</span></span>
-                        <span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span>
-                      </div>
-                      <div class="mode-item" data-mode="Plan">
-                        <span class="mi-body"><span class="mi-title">Plan</span> <span class="mi-sub">Ask questions, plan work</span></span>
-                        <span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span>
-                      </div>
-                    </div>
-                  </span>
-                  <span class="menu-anchor">
-                    <button class="icon-btn is-sm" data-plus-toggle aria-label="Add" aria-haspopup="true" aria-expanded="false" style="width:28px;height:28px;color:var(--fg-low);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /> <path d="M12 5v14" /></svg></button>
+                    <button class="icon-btn is-sm" data-plus-toggle aria-label="Add" aria-haspopup="true" aria-expanded="false" style="width:30px;height:30px;color:var(--fg-low);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /> <path d="M12 5v14" /></svg></button>
                     <div class="popover plus-menu" hidden>
                       <div class="plus-item"><span class="pi-ic"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551" /></svg></span> Add files or photos</div>
                       <div class="plus-item"><span class="pi-ic"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></svg></span> Research mode</div>
-                      <hr class="divider" style="margin:var(--space-1) 0;" />
-                      <div class="plus-item"><span class="pi-ic"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6" /> <path d="m8 6-6 6 6 6" /></svg></span> Commands <span class="pi-chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg></span></div>
                     </div>
                   </span>
+                  <div class="composer-modes" role="tablist" aria-label="Mode">
+                    <button class="cmode is-active" role="tab" aria-selected="true" data-cmode="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg> Chat</button>
+                    <button class="cmode" role="tab" aria-selected="false" data-cmode="cowork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4" /> <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg> Cowork</button>
+                  </div>
+                  <span class="spacer"></span>
                   <span class="menu-anchor">
                     <button class="model-chip" data-model-toggle aria-haspopup="true" aria-expanded="false"><span class="mdl">skyAgent Pro</span> <span class="eff">High</span> <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
                     <div class="popover model-menu-p" hidden style="min-width:220px;">
@@ -1932,11 +1936,34 @@
                       <div class="mode-item" data-eff="Low"><span class="mi-body"><span class="mi-title">Low</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></div>
                     </div>
                   </span>
-                  <span class="spacer"></span>
-                  <button class="icon-btn is-sm" data-mic aria-label="Dictate" aria-pressed="false" style="width:28px;height:28px;color:var(--fg-low);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg></button>
+                  <button class="icon-btn is-sm" data-mic aria-label="Dictate" aria-pressed="false" style="width:30px;height:30px;color:var(--fg-low);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg></button>
+                  <button class="icon-btn is-sm" data-voice aria-label="Voice mode" style="width:30px;height:30px;color:var(--fg-low);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2" /><path d="M6 8v8" /><path d="M10 4v16" /><path d="M14 8v8" /><path d="M18 6v12" /><path d="M22 10v4" /></svg></button>
                   <button class="btn btn-surface is-sm" data-ws-stop hidden><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><rect x="7" y="7" width="10" height="10" rx="2"/></svg> Stop</button>
                   <button class="btn btn-solid is-sm" data-ws-send>Send <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /> <path d="m21.854 2.147-10.94 10.939" /></svg></button>
                 </div>
+              </div>
+              <div class="composer-cowork" data-cowork-row hidden>
+                <span class="menu-anchor">
+                  <button class="cw-chip" data-project-toggle aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></svg> <span class="cw-label">Project</span> <svg class="cw-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
+                  <div class="popover project-menu" hidden>
+                    <div class="pm-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></svg><input type="text" placeholder="Search projects" aria-label="Search projects" /></div>
+                    <button class="pm-item" data-proj-pick="Willow Springs Turnaround"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></svg> Willow Springs Turnaround</button>
+                    <button class="pm-item" data-proj-pick="Q3 Board Reporting"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></svg> Q3 Board Reporting</button>
+                    <hr class="divider" style="margin:var(--space-1) 0;" />
+                    <button class="pm-item" data-proj-new><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg> Create new project</button>
+                    <button class="pm-item" data-proj-all><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /></svg> View all projects</button>
+                  </div>
+                </span>
+                <span class="menu-anchor">
+                  <button class="cw-chip" data-approval-toggle aria-haspopup="true" aria-expanded="false" title="skyAgent runs on its own and pauses to ask if anything looks unsafe."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" /><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" /><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" /></svg> <span class="cw-label">Manual</span> <svg class="cw-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg></button>
+                  <div class="popover approval-menu" hidden>
+                    <button class="mode-item is-selected" data-approval="Manual"><span class="ap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" /><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" /><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" /><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" /></svg></span><span class="mi-body"><span class="mi-title">Manually approve</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></button>
+                    <button class="mode-item" data-approval="Automatic"><span class="ap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m13 19 9-7-9-7v14Z" /><path d="m2 19 9-7-9-7v14Z" /></svg></span><span class="mi-body"><span class="mi-title">Automatically approve</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></button>
+                    <button class="mode-item" data-approval="Skip"><span class="ap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg></span><span class="mi-body"><span class="mi-title">Skip all approvals</span></span><span class="mi-check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span></button>
+                  </div>
+                </span>
+                <span class="spacer"></span>
+                <span class="usage-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></svg> 2× more usage this month</span>
               </div>
               <div class="composer-hint">Enter to send, Shift+Enter for new line, type / for commands</div>
             </div>
@@ -3234,41 +3261,57 @@
           if (mod && (e.key === 'k' || e.key === 'K')){ e.preventDefault(); var s = wsView.querySelector('[data-recents-search]'); if (s) s.focus(); return; }
         });
 
-        // --- surface mode switch (Chat / Cowork / Code) ---
+        // --- composer mode toggle (Chat / Cowork) ---
         var MODE_CFG = {
-          chat:   { primary:'New chat',    ph:"Ask skyAgent anything… (type / for skills)",            title:"Coffee and skyAgent time?", sub:"Ask about your portfolio, or pick a command below." },
-          cowork: { primary:'New task',    ph:"Describe a task and skyAgent will take it off your plate…", title:"What can I take off your plate?", sub:"Delegate operational work — skyAgent runs it end to end." },
-          code:   { primary:'New session', ph:"Describe an automation, query, or agent config…",         title:"What's up next?", sub:"Build automations, data queries, and agent configs." }
+          chat:   { primary:'New chat', ph:'How can I help you today?' },
+          cowork: { primary:'New task', ph:'Type / for skills' }
         };
+        var GREETING = 'Hey there, Sumit Awinash';
         var primaryBtn = wsView.querySelector('[data-ws-primary] .lbl');
         var input = wsView.querySelector('[data-ws-input]');
         var emptyTitleEl = wsView.querySelector('.ws-empty .empty-title');
         var emptySubEl = wsView.querySelector('.ws-empty .empty-sub');
+        var coworkRow = wsView.querySelector('[data-cowork-row]');
         function syncEmptyMode(mode){ wsView.querySelectorAll('.ws-empty [data-empty-mode]').forEach(function(b){ b.hidden = b.getAttribute('data-empty-mode') !== mode; }); }
-        wsView.querySelectorAll('[data-ws-mode]').forEach(function(m){ m.addEventListener('click', function(){
-          wsView.querySelectorAll('[data-ws-mode]').forEach(function(x){ x.classList.remove('is-active'); x.setAttribute('aria-selected','false'); });
-          m.classList.add('is-active'); m.setAttribute('aria-selected','true');
-          var cfg = MODE_CFG[m.dataset.wsMode] || MODE_CFG.chat;
+        function applyMode(mode){
+          if (!MODE_CFG[mode]) mode = 'chat';
+          wsView.querySelectorAll('[data-cmode]').forEach(function(x){ var on = x.dataset.cmode === mode; x.classList.toggle('is-active', on); x.setAttribute('aria-selected', String(on)); });
+          var cfg = MODE_CFG[mode];
           if (primaryBtn) primaryBtn.textContent = cfg.primary;
           if (input) input.placeholder = cfg.ph;
-          if (emptyTitleEl) emptyTitleEl.textContent = cfg.title;
-          if (emptySubEl) emptySubEl.textContent = cfg.sub;
-          syncEmptyMode(m.dataset.wsMode);
-          var sr = wsView.querySelector('[data-scope-row]'); if (sr) sr.hidden = (m.dataset.wsMode !== 'code');
-          try { localStorage.setItem('skycmd.ws.mode', m.dataset.wsMode); } catch (e) {}
-        }); });
-        syncEmptyMode('chat');
+          if (emptyTitleEl) emptyTitleEl.textContent = GREETING;
+          if (emptySubEl) emptySubEl.textContent = '';
+          syncEmptyMode(mode);
+          if (coworkRow) coworkRow.hidden = (mode !== 'cowork');
+          try { localStorage.setItem('skycmd.ws.mode', mode); } catch (e) {}
+        }
+        wsView.querySelectorAll('[data-cmode]').forEach(function(b){ b.addEventListener('click', function(){ applyMode(b.dataset.cmode); }); });
+        applyMode('chat');
 
-        // --- Code composer: scope chips, accept-edits cycle, mic ---
-        wsView.querySelectorAll('[data-scope]').forEach(function(c){ c.addEventListener('click', function(){
-          if (c.dataset.scope === 'add') return; // "Add source" is a launcher, not a toggle
-          wsView.querySelectorAll('[data-scope]').forEach(function(x){ if (x.dataset.scope !== 'add') x.classList.remove('is-active'); });
-          c.classList.add('is-active');
-        }); });
-        var aeBtn = wsView.querySelector('[data-ae-cycle]'); var AE = ['Accept edits', 'Suggest only', 'Auto-run']; var aeIdx = 0;
-        if (aeBtn) aeBtn.addEventListener('click', function(){ aeIdx = (aeIdx + 1) % AE.length; aeBtn.querySelector('.ae-label').textContent = AE[aeIdx]; });
+        // mic + voice affordances
         var micBtn = wsView.querySelector('[data-mic]');
         if (micBtn) micBtn.addEventListener('click', function(){ var on = micBtn.classList.toggle('is-recording'); micBtn.setAttribute('aria-pressed', String(on)); });
+        var voiceBtn = wsView.querySelector('[data-voice]');
+        if (voiceBtn) voiceBtn.addEventListener('click', function(){ voiceBtn.classList.toggle('is-recording'); });
+
+        // Cowork: project + approval dropdowns
+        (function(){
+          function bindMenu(btnSel, menuSel){ var btn = wsView.querySelector(btnSel), menu = wsView.querySelector(menuSel); if (!btn || !menu) return null;
+            btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.hidden; wsView.querySelectorAll('.project-menu, .approval-menu').forEach(function(m){ m.hidden = true; }); menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); });
+            menu.addEventListener('click', function(e){ e.stopPropagation(); }); return { btn: btn, menu: menu }; }
+          var pj = bindMenu('[data-project-toggle]', '.project-menu');
+          var ap = bindMenu('[data-approval-toggle]', '.approval-menu');
+          if (pj){
+            pj.menu.querySelectorAll('[data-proj-pick]').forEach(function(it){ it.addEventListener('click', function(){ pj.btn.querySelector('.cw-label').textContent = it.dataset.projPick; pj.menu.hidden = true; }); });
+            var pnew = pj.menu.querySelector('[data-proj-new]'); if (pnew) pnew.addEventListener('click', function(){ pj.menu.hidden = true; openProjects(); });
+            var pall = pj.menu.querySelector('[data-proj-all]'); if (pall) pall.addEventListener('click', function(){ pj.menu.hidden = true; openProjects(); });
+          }
+          if (ap){ ap.menu.querySelectorAll('[data-approval]').forEach(function(it){ it.addEventListener('click', function(){
+            ap.menu.querySelectorAll('[data-approval]').forEach(function(x){ x.classList.remove('is-selected'); }); it.classList.add('is-selected');
+            ap.btn.querySelector('.cw-label').textContent = it.dataset.approval; ap.menu.hidden = true;
+          }); }); }
+          document.addEventListener('click', function(){ wsView.querySelectorAll('.project-menu, .approval-menu').forEach(function(m){ m.hidden = true; }); });
+        })();
 
         // --- model + effort menu ---
         var modelBtn = wsView.querySelector('[data-model-toggle]');
@@ -3571,16 +3614,11 @@
           routines:'<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>',
           customize:'<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="2" y1="14" x2="6" y2="14"/><line x1="10" y1="8" x2="14" y2="8"/><line x1="18" y1="16" x2="22" y2="16"/>'
         }; return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">'+(p[k]||'')+'</svg>'; }
-        var RAIL_LINKS = {
-          chat:   [ {k:'projects',l:'Projects'}, {k:'artifacts',l:'Artifacts'}, {k:'customize',l:'Customize'} ],
-          cowork: [ {k:'projects',l:'Projects'}, {k:'artifacts',l:'Artifacts'}, {k:'scheduled',l:'Scheduled',b:'2'}, {k:'dispatch',l:'Dispatch',b:'Beta'}, {k:'customize',l:'Customize'} ],
-          code:   [ {k:'artifacts',l:'Artifacts'}, {k:'sessions',l:'Sessions',b:'9'}, {k:'routines',l:'Routines'}, {k:'customize',l:'Customize'} ]
-        };
+        var RAIL_FIXED = [ {k:'projects',l:'Projects'}, {k:'artifacts',l:'Artifacts'}, {k:'customize',l:'Customize'} ];
         var railEl = document.getElementById('wsRailLinks');
-        function currentMode(){ var a = wsView.querySelector('[data-ws-mode].is-active'); return a ? a.dataset.wsMode : 'chat'; }
-        function renderRail(mode){ if (!railEl) return; railEl.innerHTML = (RAIL_LINKS[mode] || RAIL_LINKS.chat).map(function(x){ return '<button class="ws-rail-link" type="button" data-rail="'+x.k+'">'+ico(x.k)+'<span>'+x.l+'</span>'+(x.b?'<span class="rl-badge">'+x.b+'</span>':'')+'</button>'; }).join(''); }
-        wsView.querySelectorAll('[data-ws-mode]').forEach(function(m){ m.addEventListener('click', function(){ renderRail(m.dataset.wsMode); }); });
-        renderRail(currentMode());
+        function currentMode(){ var a = wsView.querySelector('[data-cmode].is-active'); return a ? a.dataset.cmode : 'chat'; }
+        function renderRail(){ if (!railEl) return; railEl.innerHTML = RAIL_FIXED.map(function(x){ return '<button class="ws-rail-link" type="button" data-rail="'+x.k+'">'+ico(x.k)+'<span>'+x.l+'</span>'+(x.b?'<span class="rl-badge">'+x.b+'</span>':'')+'</button>'; }).join(''); }
+        renderRail();
 
         // --- / skills palette ---
         var SKILLS = [
@@ -3649,7 +3687,7 @@
         }
 
         // --- persistence: restore last-used mode; restore full-screen when entering the workspace ---
-        try { var savedMode = localStorage.getItem('skycmd.ws.mode'); if (savedMode && MODE_CFG[savedMode] && savedMode !== 'chat'){ var mb = wsView.querySelector('[data-ws-mode="'+savedMode+'"]'); if (mb) mb.click(); } } catch (e) {}
+        try { var savedMode = localStorage.getItem('skycmd.ws.mode'); if (savedMode && MODE_CFG[savedMode]) applyMode(savedMode); } catch (e) {}
         try { var savedModel = localStorage.getItem('skycmd.ws.model'); if (savedModel && modelBtn) modelBtn.querySelector('.mdl').textContent = savedModel; } catch (e) {}
         var wsNav = document.querySelector('.app-sidebar .nav-item[data-view="view-workspace"]');
         if (wsNav) wsNav.addEventListener('click', function(){ try { if (localStorage.getItem('skycmd.ws.fs') === '1') shell.classList.add('ws-immersive'); } catch (e) {} });
