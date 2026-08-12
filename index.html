@@ -905,6 +905,8 @@
     .tool-summary a:hover { text-decoration: underline; }
 
     /* ============ NEXT BEST ACTION ============ */
+    #view-nba { background: #fff; }
+    :root[data-theme="dark"] #view-nba { background: var(--color-page); }
     .nba-topbar { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-5); }
     .nba-topbar .tab-nav { flex: 1; }
     .nba-scope { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--fs-1); color: var(--fg-subtle); white-space: nowrap; padding-bottom: var(--space-2); }
@@ -914,7 +916,7 @@
     .nba-summary strong { color: var(--fg-high); font-weight: var(--weight-semibold); }
     .nba-summary .sep { color: var(--border-strong); }
 
-    .nba-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--space-5); align-items: start; }
+    .nba-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--space-5); align-items: start; margin-top: var(--space-5); }
     @media (max-width: 1100px) { .nba-grid { grid-template-columns: 1fr; } }
 
     .nba-list { display: flex; flex-direction: column; gap: var(--space-3); }
@@ -1242,8 +1244,8 @@
 
         <div class="content-body">
           <header class="page-header">
-            <h1>Next Best Action</h1>
-            <p>The few things worth your attention now — ranked by what it costs to ignore them.</p>
+            <h1>Your day, ranked</h1>
+            <p data-nba-lens></p>
           </header>
 
           <div class="nba-topbar">
@@ -1253,11 +1255,7 @@
               <a class="tab-nav-item" href="#" role="tab" data-nba-tab="week">This Week</a>
               <a class="tab-nav-item" href="#" role="tab" data-nba-tab="month">This Month</a>
             </div>
-            <span class="nba-scope"><span class="dot"></span> Operator view · updated <span data-nba-time>2:57 PM</span></span>
           </div>
-
-          <p class="nba-lens" data-nba-lens></p>
-          <div class="nba-summary" data-nba-summary></div>
 
           <div class="nba-grid">
             <div class="nba-list" id="nbaList" role="list"><!-- rendered --></div>
@@ -4518,11 +4516,12 @@
         var view = document.getElementById('view-nba'); if (!view) return;
 
         var LENS = {
-          today:    'What moved against you today — and what it costs.',
-          tomorrow: 'Where you land if the current trend holds. Only metrics with a real leading indicator are projected.',
+          today:    'What moved against you — and what it costs.',
+          tomorrow: 'Where you land if the current trend holds.',
           week:     'Where you stand against budget this week — and what closes the gap.',
           month:    'Where you stand against budget this month — and what closes the gap.'
         };
+        var SCOPE_SUFFIX = ' Scoped to your operator view. Generated 2:57 PM.';
         var SUMMARY = {
           today:    ['3 actions', '~$56K/mo at stake'],
           tomorrow: ['2 projections', 'from live leading indicators'],
@@ -4666,7 +4665,6 @@
 
         var listEl = document.getElementById('nbaList');
         var lensEl = view.querySelector('[data-nba-lens]');
-        var sumEl = view.querySelector('[data-nba-summary]');
         var current = 'today';
         var SEV_WEIGHT = { critical:3, watch:2, info:1 };
         function costValue(c){
@@ -4685,9 +4683,8 @@
 
         function render(){
           var items = DATA[current];
-          lensEl.textContent = LENS[current];
+          lensEl.textContent = LENS[current] + SCOPE_SUFFIX;
           if (!items.length){
-            sumEl.innerHTML = '<span>You’re all caught up · nothing at stake right now</span>';
             listEl.innerHTML = '<div class="nba-empty">' + EMPTY_ART +
               '<h3>Nothing needs your attention right now.</h3>' +
               '<p>When a metric moves against you, it’ll show up here with a way to act on it.</p>' +
@@ -4696,7 +4693,6 @@
             return;
           }
           items.sort(function(a,b){ return priScore(b) - priScore(a); });
-          sumEl.innerHTML = '<strong>'+items.length+(items.length===1?' action':' actions')+'</strong><span class="sep">·</span><span>'+SUMMARY[current][1]+'</span>';
           listEl.innerHTML = items.map(function(it,i){ return cardHTML(it, i+1); }).join('');
         }
 

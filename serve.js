@@ -9,7 +9,7 @@ http.createServer((req, res) => {
   const file = path.join(ROOT, p);
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }
-    res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream' });
+    res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store, must-revalidate' });
     res.end(data);
   });
 }).listen(4599, () => console.log('serving on 4599'));
