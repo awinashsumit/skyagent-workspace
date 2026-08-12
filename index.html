@@ -903,6 +903,119 @@
     .tool-summary { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--fs-1); color: var(--fg-low); background: var(--gray-2); padding: 3px var(--space-2); border-radius: var(--radius-2); }
     .tool-summary a { color: var(--accent-11); text-decoration: none; font-weight: var(--weight-medium); }
     .tool-summary a:hover { text-decoration: underline; }
+
+    /* ============ NEXT BEST ACTION ============ */
+    .nba-topbar { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-5); }
+    .nba-topbar .tab-nav { flex: 1; }
+    .nba-scope { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--fs-1); color: var(--fg-subtle); white-space: nowrap; padding-bottom: var(--space-2); }
+    .nba-scope .dot { width: 6px; height: 6px; border-radius: var(--radius-full); background: var(--green-9); }
+    .nba-lens { margin: var(--space-4) 0 var(--space-2); color: var(--fg-low); font-size: var(--fs-3); }
+    .nba-summary { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); font-size: var(--fs-2); color: var(--fg-low); }
+    .nba-summary strong { color: var(--fg-high); font-weight: var(--weight-semibold); }
+    .nba-summary .sep { color: var(--border-strong); }
+
+    .nba-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--space-5); align-items: start; }
+    @media (max-width: 1100px) { .nba-grid { grid-template-columns: 1fr; } }
+
+    .nba-list { display: flex; flex-direction: column; gap: var(--space-3); }
+
+    /* ranked action card */
+    .nba-card { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: var(--space-3); padding: var(--space-4); background: var(--color-panel-solid); border: 1px solid var(--border-subtle); border-radius: var(--radius-4); transition: box-shadow .15s ease, border-color .15s ease; }
+    .nba-card:hover { border-color: var(--border-ui); box-shadow: var(--shadow-2); }
+    .nba-card.sev-critical { border-left: 3px solid var(--red-9); }
+    .nba-card.sev-watch { border-left: 3px solid var(--orange-9); }
+    .nba-card.sev-info { border-left: 3px solid var(--blue-8); }
+    .nba-rank { font-size: var(--fs-5); font-weight: var(--weight-bold); color: var(--fg-subtle); line-height: 1.1; font-variant-numeric: tabular-nums; }
+    .nba-body { min-width: 0; }
+    .nba-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); }
+    .nba-pills { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+    .nba-cost { text-align: right; flex: 0 0 auto; }
+    .nba-cost .amt { font-size: var(--fs-4); font-weight: var(--weight-bold); color: var(--fg-high); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+    .nba-cost .lbl { display: block; font-size: 11px; color: var(--fg-subtle); margin-top: 1px; }
+    .nba-title { margin: var(--space-2) 0 var(--space-1); font-size: var(--fs-3); font-weight: var(--weight-semibold); color: var(--fg-high); line-height: var(--lh-3); }
+    .nba-detail { display: flex; align-items: center; gap: var(--space-2); font-size: var(--fs-2); color: var(--fg-low); }
+    .nba-detail .delta { font-weight: var(--weight-medium); font-variant-numeric: tabular-nums; }
+    .nba-detail .delta.down { color: var(--red-11); }
+    .nba-detail .delta.up { color: var(--green-11); }
+    .nba-spark { flex: 0 0 auto; display: inline-flex; }
+    .nba-rec { display: flex; align-items: flex-start; gap: var(--space-2); margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle); font-size: var(--fs-2); color: var(--fg-low); }
+    .nba-rec .rec-ic { color: var(--accent-11); flex: 0 0 auto; margin-top: 1px; }
+    .nba-rec strong { color: var(--fg-high); font-weight: var(--weight-medium); }
+    .nba-actions { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-3); }
+    .nba-actions .spacer { flex: 1; }
+
+    /* right rail */
+    .nba-rail { display: flex; flex-direction: column; gap: var(--space-4); position: sticky; top: var(--space-5); }
+    .goals-card .gc-head, .legend-card .lg-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); margin-bottom: var(--space-3); }
+    .goals-card .gc-title, .legend-card .lg-title { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--fs-2); font-weight: var(--weight-semibold); color: var(--fg-high); }
+    .goals-card .gc-title svg, .legend-card .lg-title svg { color: var(--accent-11); }
+    .goals-empty { font-size: var(--fs-2); color: var(--fg-low); line-height: var(--lh-2); }
+    .goal-list { display: flex; flex-direction: column; gap: var(--space-2); }
+    .goal-chip { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); background: var(--gray-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-3); font-size: var(--fs-2); }
+    .goal-chip .gc-metric { font-weight: var(--weight-medium); color: var(--fg-high); }
+    .goal-chip .gc-target { color: var(--fg-low); }
+    .goal-chip .gc-x { margin-left: auto; display: inline-flex; padding: 2px; border-radius: var(--radius-2); color: var(--fg-subtle); cursor: pointer; border: 0; background: transparent; }
+    .goal-chip .gc-x:hover { background: var(--gray-4); color: var(--fg-high); }
+    .goal-form { display: flex; flex-direction: column; gap: var(--space-3); }
+    .goal-form .field-label { font-size: var(--fs-1); font-weight: var(--weight-medium); color: var(--fg-low); margin-bottom: var(--space-1); display: block; }
+    .goal-form .field-hint { font-size: 11px; color: var(--fg-subtle); margin-top: var(--space-1); line-height: 1.4; }
+    .goal-form .row2 { display: grid; grid-template-columns: 1fr 110px; gap: var(--space-2); }
+    .nba-num, .nba-nativeless { width: 100%; height: 36px; padding: 0 var(--space-3); background: var(--color-surface); border: 1px solid var(--border-ui); border-radius: var(--radius-3); font-family: var(--font-base); font-size: var(--fs-2); color: var(--fg-high); }
+    .nba-num:focus, .nba-nativeless:focus { outline: none; border-color: var(--accent-8); box-shadow: 0 0 0 3px var(--accent-4); }
+
+    /* custom DS dropdown (replaces native select) */
+    .mx-select { position: relative; }
+    .mx-btn { display: flex; align-items: center; gap: var(--space-2); width: 100%; height: 36px; padding: 0 var(--space-3); background: var(--color-surface); border: 1px solid var(--border-ui); border-radius: var(--radius-3); font-family: var(--font-base); font-size: var(--fs-2); color: var(--fg-high); cursor: pointer; text-align: left; }
+    .mx-btn.is-placeholder { color: var(--fg-subtle); }
+    .mx-btn:hover { border-color: var(--border-strong); }
+    .mx-btn .mx-val { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mx-btn .mx-chev { color: var(--fg-subtle); flex: 0 0 auto; }
+    .mx-menu { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 40; max-height: 280px; overflow-y: auto; background: var(--color-panel-solid); border: 1px solid var(--border-subtle); border-radius: var(--radius-3); box-shadow: var(--shadow-4); padding: var(--space-1); }
+    .mx-menu[hidden] { display: none; }
+    .mx-group { font-size: 11px; font-weight: var(--weight-medium); color: var(--fg-subtle); padding: var(--space-2) var(--space-2) var(--space-1); }
+    .mx-opt { display: flex; align-items: center; width: 100%; padding: var(--space-2) var(--space-3); border: 0; background: transparent; border-radius: var(--radius-2); font-family: var(--font-base); font-size: var(--fs-2); color: var(--fg-high); text-align: left; cursor: pointer; }
+    .mx-opt:hover { background: var(--gray-3); }
+    .mx-opt.is-selected { color: var(--accent-11); font-weight: var(--weight-medium); }
+
+    /* legend */
+    .legend-card .lg-row { display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--fs-1); color: var(--fg-low); line-height: 1.5; }
+    .legend-card .lg-row + .lg-row { margin-top: var(--space-2); }
+    .legend-card .lg-dot { width: 8px; height: 8px; border-radius: var(--radius-full); flex: 0 0 auto; margin-top: 5px; }
+    .lg-dot.crit { background: var(--red-9); } .lg-dot.watch { background: var(--orange-9); } .lg-dot.info { background: var(--blue-8); }
+
+    /* assign-to picker (single CTA) */
+    .assign-wrap { position: relative; }
+    .nba-card.is-assigned { opacity: .62; }
+    .assign-menu { position: absolute; left: 0; top: calc(100% + 6px); z-index: 40; width: 264px; max-height: 300px; overflow-y: auto; background: var(--color-panel-solid); border: 1px solid var(--border-subtle); border-radius: var(--radius-3); box-shadow: var(--shadow-4); padding: var(--space-1); }
+    .assign-menu[hidden] { display: none; }
+    .assign-menu .am-head { font-size: 11px; font-weight: var(--weight-medium); color: var(--fg-subtle); padding: var(--space-2) var(--space-2) var(--space-1); }
+    .am-opt { display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-2); border: 0; background: transparent; border-radius: var(--radius-2); cursor: pointer; text-align: left; font-family: var(--font-base); }
+    .am-opt:hover { background: var(--gray-3); }
+    .am-av { width: 26px; height: 26px; border-radius: var(--radius-full); flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: var(--weight-semibold); color: #fff; }
+    .am-meta { min-width: 0; display: flex; flex-direction: column; }
+    .am-name { display: block; font-size: var(--fs-2); color: var(--fg-high); font-weight: var(--weight-medium); }
+    .am-role { display: block; font-size: 11px; color: var(--fg-low); }
+    .nba-assigned { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--fs-2); color: var(--fg-low); }
+    .nba-assigned .am-av { width: 22px; height: 22px; }
+    .nba-assigned strong { color: var(--fg-high); font-weight: var(--weight-medium); }
+    .nba-assigned .undo { border: 0; background: transparent; color: var(--accent-11); font: inherit; font-size: var(--fs-1); cursor: pointer; padding: 2px var(--space-1); border-radius: var(--radius-2); }
+    .nba-assigned .undo:hover { background: var(--accent-3); }
+
+    /* toast */
+    .nba-toast { position: fixed; left: 50%; bottom: var(--space-6); transform: translateX(-50%) translateY(10px); z-index: 200; display: flex; align-items: center; gap: var(--space-2); background: var(--gray-12); color: var(--gray-1); font-size: var(--fs-2); padding: var(--space-2) var(--space-4); border-radius: var(--radius-full); box-shadow: var(--shadow-4); opacity: 0; visibility: hidden; transition: opacity .2s ease, transform .2s ease, visibility .2s ease; }
+    .nba-toast.is-open { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .nba-toast .tk { color: var(--green-8); display: inline-flex; }
+
+    /* empty state — "you're all caught up" */
+    .nba-empty { display: flex; flex-direction: column; align-items: center; text-align: center; padding: var(--space-9) var(--space-5); background: var(--color-panel-solid); border: 1px solid var(--border-subtle); border-radius: var(--radius-4); }
+    .nba-empty .nba-empty-art { width: 100%; max-width: 360px; height: auto; margin-bottom: var(--space-2); }
+    .nba-empty .nba-art-bg { fill: #FFF7EA; }
+    :root[data-theme="dark"] .nba-empty .nba-art-bg { fill: #362C1A; }
+    .nba-empty .ne-ic { width: 56px; height: 56px; border-radius: var(--radius-full); background: var(--success-bg); color: var(--success-text); display: inline-flex; align-items: center; justify-content: center; margin-bottom: var(--space-4); }
+    .nba-empty .ne-ic[hidden] { display: none; }
+    .nba-empty h3 { font-size: var(--fs-5); font-weight: var(--weight-semibold); color: var(--fg-high); }
+    .nba-empty p { margin-top: var(--space-2); color: var(--fg-low); font-size: var(--fs-3); max-width: 44ch; line-height: var(--lh-3); }
+    .nba-empty .ne-hint { margin-top: var(--space-4); font-size: var(--fs-1); color: var(--fg-subtle); }
   </style>
 </head>
 <body>
@@ -1005,6 +1118,12 @@
       <button class="sidebar-toggle" aria-label="Collapse navigation">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M9 3v18" /></svg>
       </button>
+
+      <div class="nav-section">For You</div>
+      <a class="nav-item" href="#" data-view="view-nba">
+        <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg>
+        <span class="nav-label">Next Best Action</span>
+      </a>
 
       <div class="nav-section">Insights</div>
       <a class="nav-item is-active" href="#" aria-current="page" data-view="view-portfolio">
@@ -1112,6 +1231,58 @@
 
     <!-- ============ CONTENT ============ -->
     <main class="app-content">
+
+      <!-- ===== NEXT BEST ACTION VIEW ===== -->
+      <div class="view" id="view-nba" hidden>
+        <div class="breadcrumbs">
+          <a href="#">For You</a>
+          <span class="sep"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg></span>
+          <span class="current">Next Best Action</span>
+        </div>
+
+        <div class="content-body">
+          <header class="page-header">
+            <h1>Next Best Action</h1>
+            <p>The few things worth your attention now — ranked by what it costs to ignore them.</p>
+          </header>
+
+          <div class="nba-topbar">
+            <div class="tab-nav" role="tablist">
+              <a class="tab-nav-item is-active" href="#" role="tab" data-nba-tab="today">Today</a>
+              <a class="tab-nav-item" href="#" role="tab" data-nba-tab="tomorrow">Tomorrow</a>
+              <a class="tab-nav-item" href="#" role="tab" data-nba-tab="week">This Week</a>
+              <a class="tab-nav-item" href="#" role="tab" data-nba-tab="month">This Month</a>
+            </div>
+            <span class="nba-scope"><span class="dot"></span> Operator view · updated <span data-nba-time>2:57 PM</span></span>
+          </div>
+
+          <p class="nba-lens" data-nba-lens></p>
+          <div class="nba-summary" data-nba-summary></div>
+
+          <div class="nba-grid">
+            <div class="nba-list" id="nbaList" role="list"><!-- rendered --></div>
+
+            <aside class="nba-rail">
+              <!-- My goals -->
+              <div class="card goals-card" id="goalsCard">
+                <div class="gc-head">
+                  <span class="gc-title"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg> My goals</span>
+                  <button class="btn btn-surface is-sm" data-goal-toggle>Set a goal</button>
+                </div>
+                <div data-goals-body></div>
+              </div>
+
+              <!-- How this is ranked -->
+              <div class="card legend-card">
+                <div class="lg-head"><span class="lg-title">How this is ranked</span></div>
+                <div class="lg-row"><span class="lg-dot crit"></span><span><strong style="color:var(--fg-high);font-weight:var(--weight-medium)">Cost of inaction.</strong> Each item is scored by the revenue or spend at risk if you leave it — highest first.</span></div>
+                <div class="lg-row"><span class="lg-dot watch"></span><span>Colour marks urgency: <span style="color:var(--red-11)">critical</span>, <span style="color:var(--orange-11)">watch</span>, <span style="color:var(--blue-11)">info</span>.</span></div>
+                <div class="lg-row"><span class="lg-dot info"></span><span>Scoped to what you can already see. Nothing here is widened by a goal.</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
 
       <!-- ===== PORTFOLIO VIEW ===== -->
       <div class="view" id="view-portfolio">
@@ -4340,6 +4511,292 @@
         });
 
         renderAll();
+      })();
+
+      /* ===================== NEXT BEST ACTION ===================== */
+      (function(){
+        var view = document.getElementById('view-nba'); if (!view) return;
+
+        var LENS = {
+          today:    'What moved against you today — and what it costs.',
+          tomorrow: 'Where you land if the current trend holds. Only metrics with a real leading indicator are projected.',
+          week:     'Where you stand against budget this week — and what closes the gap.',
+          month:    'Where you stand against budget this month — and what closes the gap.'
+        };
+        var SUMMARY = {
+          today:    ['3 actions', '~$56K/mo at stake'],
+          tomorrow: ['2 projections', 'from live leading indicators'],
+          week:     ['3 actions', '~$22K to close the gap'],
+          month:    ['2 actions', '~$5.1M under plan']
+        };
+        var DATA = {
+          today: [],   /* empty by default — a clear day shows the "all caught up" state; swap in todaySeed to populate */
+          todaySeed: [
+            { domain:'Occupancy', sev:'critical', title:'Quiet Haven Manor occupancy fell to 64.2%', delta:'−4.1 pts', dir:'down', ctx:'12 units vacant · 30-day slide', cost:'$28K', unit:'/mo at risk', rec:'Launch a move-in sprint and hold rate for at-risk residents.', spark:[74,73,71,70,68,67,65,64], act:'workspace' },
+            { domain:'Marketing', sev:'watch', title:'Willow Springs move-outs jumped to 15 this month', delta:'+6 MoM', dir:'down', ctx:'care-acuity driven, not price', cost:'$19K', unit:'/mo at risk', rec:'Model a higher-acuity care tier — retains ~40% of these residents.', spark:[6,7,8,9,11,12,14,15], act:'workspace' },
+            { domain:'Labor', sev:'watch', title:'Overtime at Rosewood Court up 32%', delta:'+32%', dir:'down', ctx:'84 OT hours this pay period', cost:'$9K', unit:'this period', rec:'Rebalance the float pool before Friday’s schedule locks.', spark:[40,44,52,58,63,70,78,84], act:'task' }
+          ],
+          tomorrow: [
+            { domain:'Occupancy', sev:'watch', title:'Portfolio occupancy on track to dip below 69% tomorrow', delta:'−0.4 pts', dir:'down', ctx:'driven by Quiet Haven + Rosewood', cost:'$12K', unit:'/mo projected', rec:'Confirm 3 pending move-ins to hold the line.', spark:[70,69.8,69.6,69.4,69.2,69,68.9,68.8], act:'workspace' },
+            { domain:'Marketing', sev:'info', title:'Lead follow-up backlog will breach SLA tomorrow', delta:'18 leads', dir:'', ctx:'over 48h without contact', cost:'~4 tours', unit:'at risk', rec:'Assign the backlog to the evening sales desk tonight.', spark:[6,8,9,11,13,15,17,18], act:'task' }
+          ],
+          week: [
+            { domain:'Financial', sev:'watch', title:'Labor spend pacing 6% over budget this week', delta:'+6%', dir:'down', ctx:'$14.2K over plan', cost:'$14K', unit:'over budget', rec:'Trim two open shifts flagged as low-census.', spark:[100,101,102,103,104,105,106,106], act:'workspace' },
+            { domain:'Marketing', sev:'info', title:'Tours booked trailing the weekly target by 4', delta:'16 of 20', dir:'', ctx:'−1 move-in equivalent at risk', cost:'~1 move-in', unit:'at risk', rec:'Push two warm leads to tour before Friday.', spark:[20,18,17,17,16,16,16,16], act:'task' },
+            { domain:'Occupancy', sev:'info', title:'Net MIMO flat versus a +3 target', delta:'0 vs +3', dir:'', ctx:'3 move-ins, 3 move-outs', cost:'$8K', unit:'/mo gap', rec:'Prioritize the two ready-to-sign leads.', spark:[3,2,2,1,1,0,0,0], act:'workspace' }
+          ],
+          month: [
+            { domain:'Financial', sev:'critical', title:'Revenue tracking 22% under budget for the month', delta:'−$4.5M', dir:'down', ctx:'$15.7M actual vs $20.2M plan', cost:'$4.5M', unit:'under plan', rec:'Focus recovery on the three at-risk communities.', spark:[20.2,19,18,17.5,16.8,16.2,15.9,15.7], act:'workspace' },
+            { domain:'Financial', sev:'watch', title:'NOI margin 3.1 points below plan', delta:'−3.1 pts', dir:'down', ctx:'labor + concessions the main drag', cost:'$0.6M', unit:'/mo', rec:'Review the concession policy at Bright Days and Rosewood.', spark:[31,30.5,30,29.4,28.8,28.4,28.1,27.9], act:'task' }
+          ]
+        };
+        var DOMAIN_ICON = {
+          Occupancy:'<path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/>',
+          Financial:'<line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+          Labor:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>',
+          Marketing:'<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>'
+        };
+
+        function spark(pts, sev){
+          var w = 68, h = 22, min = Math.min.apply(null, pts), max = Math.max.apply(null, pts), rng = (max - min) || 1;
+          var d = pts.map(function(v,i){ var x = (i/(pts.length-1))*w; var y = h - ((v-min)/rng)*(h-4) - 2; return (i?'L':'M') + x.toFixed(1) + ' ' + y.toFixed(1); }).join(' ');
+          var col = sev === 'critical' ? 'var(--red-8)' : sev === 'watch' ? 'var(--orange-8)' : 'var(--gray-8)';
+          return '<svg class="nba-spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" fill="none"><path d="'+d+'" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        }
+
+        var SEV_BADGE = { critical:['is-danger','Critical'], watch:['is-warning','Watch'], info:['is-info','Info'] };
+
+        /* Designer "all caught up" illustration. Light + dark share one SVG; only the
+           background blob switches by theme (class .nba-art-bg — see CSS). */
+        var EMPTY_ART = `<svg class="nba-empty-art" viewBox="0 0 904 769" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="You are all caught up">
+<path d="M425.601 231C489.389 231 541.101 179.289 541.101 115.5C541.101 51.7111 489.389 0 425.601 0C361.812 0 310.101 51.7111 310.101 115.5C310.101 179.289 361.812 231 425.601 231Z" fill="#0ECF82" fill-opacity="0.3"/>
+<path class="nba-art-bg" d="M413.218 308.356C328.818 336.756 278.051 307.523 263.218 289.356C242.885 257.523 104.252 202.1 34.6005 308.356C-49.3994 436.5 42.6007 538.833 69.1008 568C-1.89924 652 65.5112 746.333 109.601 756C304.934 770.833 554.101 773.5 753.601 756C825.45 749.697 903.718 578.356 903.718 449.356C903.718 346.156 835.385 287.023 801.218 270.356C791.552 265.189 757.318 252.656 697.718 243.856C623.218 232.856 518.718 272.856 413.218 308.356Z"/>
+<path d="M426.101 196C470.283 196 506.101 160.183 506.101 116C506.101 71.8172 470.283 36 426.101 36C381.918 36 346.101 71.8172 346.101 116C346.101 160.183 381.918 196 426.101 196Z" fill="#0ECF82"/>
+<path d="M417.404 149C416.303 149 415.217 148.744 414.232 148.252C413.247 147.76 412.391 147.046 411.73 146.166L394.326 123.008C393.301 121.5 392.897 119.656 393.198 117.859C393.499 116.061 394.481 114.449 395.942 113.355C397.402 112.262 399.228 111.772 401.041 111.988C402.854 112.203 404.514 113.107 405.676 114.512L417.052 129.66L446.282 85.8845C447.365 84.417 448.972 83.4223 450.77 83.107C452.569 82.7916 454.419 83.1797 455.938 84.1908C457.458 85.2019 458.528 86.7583 458.928 88.5367C459.328 90.3152 459.026 92.1791 458.086 93.7414L423.3 145.84C422.671 146.782 421.824 147.56 420.831 148.108C419.838 148.657 418.729 148.96 417.594 148.992L417.404 149Z" fill="white"/>
+<path d="M244.544 263.938C269.397 263.938 289.544 243.791 289.544 218.938C289.544 194.085 269.397 173.938 244.544 173.938C219.691 173.938 199.544 194.085 199.544 218.938C199.544 243.791 219.691 263.938 244.544 263.938Z" fill="#FF6584"/>
+<path d="M240.978 242.5H235.222V207.059C235.222 202.269 233.319 197.676 229.932 194.289C226.546 190.903 221.952 189 217.163 189H192.222V138H188.222V189H154.222V242.5H120.722V755.5H308.722V310.244C308.722 292.277 301.584 275.046 288.88 262.342C276.175 249.637 258.945 242.5 240.978 242.5Z" fill="#FFE5B2"/>
+<path d="M413.187 555H408.222V548.059C408.219 543.456 406.458 539.027 403.298 535.68C400.137 532.333 395.817 530.32 391.222 530.053V483H387.222V530H369.222V555H305.222V756H447.222V589.035C447.222 580.008 443.636 571.351 437.253 564.969C430.87 558.586 422.213 555 413.187 555Z" fill="#FFE5B2"/>
+<path d="M687.222 411.108V399.059C687.22 394.456 685.458 390.027 682.298 386.68C679.138 383.332 674.817 381.319 670.222 381.053V334H666.222V381H648.222V411H563.222V756H751.222V478.744C751.221 461.426 744.588 444.766 732.685 432.187C720.782 419.607 704.513 412.065 687.222 411.108Z" fill="#FFE5B2"/>
+<path d="M619.222 460H594.222V480H619.222V460Z" fill="white"/><path d="M660.222 460H635.222V480H660.222V460Z" fill="white"/><path d="M701.222 460H676.222V480H701.222V460Z" fill="white"/>
+<path d="M619.222 511H594.222V531H619.222V511Z" fill="white"/><path d="M660.222 511H635.222V531H660.222V511Z" fill="white"/><path d="M701.222 511H676.222V531H701.222V511Z" fill="white"/>
+<path d="M619.222 562H594.222V582H619.222V562Z" fill="white"/><path d="M660.222 562H635.222V582H660.222V562Z" fill="white"/><path d="M701.222 562H676.222V582H701.222V562Z" fill="white"/>
+<path d="M619.222 612.999H594.222V632.999H619.222V612.999Z" fill="white"/><path d="M660.222 612.999H635.222V632.999H660.222V612.999Z" fill="white"/><path d="M701.222 612.999H676.222V632.999H701.222V612.999Z" fill="white"/>
+<path d="M619.222 663.999H594.222V683.999H619.222V663.999Z" fill="white"/><path d="M660.222 663.999H635.222V683.999H660.222V663.999Z" fill="white"/><path d="M701.222 663.999H676.222V683.999H701.222V663.999Z" fill="white"/>
+<path d="M619.222 714.999H594.222V734.999H619.222V714.999Z" fill="white"/><path d="M660.222 714.999H635.222V734.999H660.222V714.999Z" fill="white"/><path d="M701.222 714.999H676.222V734.999H701.222V714.999Z" fill="white"/>
+<path d="M255.222 283H174.222V289H255.222V283Z" fill="white"/><path d="M255.222 320H174.222V326H255.222V320Z" fill="white"/><path d="M255.222 357H174.222V363H255.222V357Z" fill="white"/><path d="M255.222 394H174.222V400H255.222V394Z" fill="white"/><path d="M255.222 431H174.222V437H255.222V431Z" fill="white"/><path d="M255.222 468H174.222V474H255.222V468Z" fill="white"/><path d="M255.222 505H174.222V511H255.222V505Z" fill="white"/><path d="M255.222 542H174.222V548H255.222V542Z" fill="white"/><path d="M255.222 578.999H174.222V584.999H255.222V578.999Z" fill="white"/><path d="M255.222 615.999H174.222V621.999H255.222V615.999Z" fill="white"/><path d="M255.222 652.999H174.222V658.999H255.222V652.999Z" fill="white"/><path d="M255.222 689.999H174.222V695.999H255.222V689.999Z" fill="white"/>
+<path d="M347.722 581.999H322.722V601.999H347.722V581.999Z" fill="white"/><path d="M388.722 581.999H363.722V601.999H388.722V581.999Z" fill="white"/><path d="M429.722 581.999H404.722V601.999H429.722V581.999Z" fill="white"/><path d="M348.222 632.999H323.222V652.999H348.222V632.999Z" fill="white"/><path d="M389.222 632.999H364.222V652.999H389.222V632.999Z" fill="white"/><path d="M430.222 632.999H405.222V652.999H430.222V632.999Z" fill="white"/><path d="M348.722 683.999H323.722V703.999H348.722V683.999Z" fill="white"/><path d="M389.722 683.999H364.722V703.999H389.722V683.999Z" fill="white"/><path d="M430.722 683.999H405.722V703.999H430.722V683.999Z" fill="white"/>
+<path d="M207.222 200H182.222V220H207.222V200Z" fill="white"/>
+<path d="M127.588 706.199C129.575 690.22 139.478 674.477 154.717 669.277C148.706 685.723 148.706 703.766 154.717 720.212C157.059 726.546 160.323 733.347 158.117 739.731C156.747 743.703 153.394 746.742 149.646 748.642C145.898 750.542 141.739 751.448 137.632 752.335L136.824 753.004C130.31 738.281 125.601 722.178 127.588 706.199Z" fill="#FFB31C"/>
+<path d="M154.868 669.579C145.993 679.522 140.477 692.009 139.104 705.266C138.758 708.115 138.863 711 139.415 713.816C140.043 716.542 141.389 719.05 143.315 721.08C145.071 723.009 147.09 724.78 148.346 727.101C148.971 728.299 149.337 729.616 149.417 730.965C149.498 732.315 149.293 733.666 148.815 734.93C147.706 738.111 145.515 740.704 143.294 743.165C140.823 745.898 138.212 748.697 137.162 752.32C137.035 752.759 136.362 752.536 136.488 752.098C138.316 745.798 144.435 742.214 147.353 736.537C148.715 733.888 149.286 730.812 148.01 728.016C146.894 725.571 144.81 723.744 143.019 721.806C141.111 719.854 139.71 717.464 138.939 714.845C138.245 712.066 138.029 709.19 138.301 706.339C138.809 699.909 140.325 693.598 142.794 687.639C145.571 680.823 149.495 674.532 154.394 669.039C154.694 668.699 155.165 669.234 154.864 669.571L154.868 669.579Z" fill="white"/>
+<path d="M139.295 700.972C137.102 700.439 135.169 699.145 133.843 697.319C132.516 695.494 131.882 693.256 132.053 691.006C132.059 690.913 132.102 690.827 132.171 690.765C132.241 690.703 132.332 690.671 132.424 690.676C132.517 690.68 132.605 690.721 132.668 690.789C132.731 690.858 132.764 690.948 132.762 691.041C132.599 693.136 133.19 695.22 134.429 696.917C135.667 698.615 137.472 699.813 139.517 700.297C139.961 700.403 139.736 701.076 139.294 700.971L139.295 700.972Z" fill="white"/>
+<path d="M142.291 720.219C146.251 717.854 149.175 714.083 150.479 709.658C150.608 709.22 151.279 709.443 151.153 709.881C149.787 714.483 146.737 718.401 142.61 720.853C142.217 721.087 141.9 720.452 142.291 720.219Z" fill="white"/>
+<path d="M146.232 681.5C147.037 681.882 147.925 682.058 148.815 682.013C149.705 681.968 150.57 681.703 151.332 681.241C151.722 681.003 152.039 681.641 151.651 681.875C150.806 682.382 149.85 682.674 148.866 682.727C147.882 682.779 146.9 682.59 146.006 682.175C145.918 682.143 145.846 682.079 145.804 681.995C145.762 681.912 145.754 681.816 145.78 681.727C145.81 681.638 145.874 681.564 145.958 681.522C146.041 681.479 146.139 681.472 146.228 681.501L146.232 681.5Z" fill="white"/>
+<path d="M201.167 697.817C200.927 697.973 200.688 698.128 200.448 698.29C197.239 700.4 194.206 702.768 191.38 705.37C191.158 705.57 190.937 705.77 190.721 705.97C183.98 712.31 178.474 719.847 174.484 728.197C172.899 731.521 171.57 734.961 170.507 738.487C169.039 743.357 167.836 748.753 164.931 752.736C164.633 753.155 164.309 753.556 163.961 753.936H137.709C137.649 753.906 137.589 753.882 137.529 753.852L136.481 753.9C136.523 753.714 136.571 753.523 136.613 753.337C136.637 753.229 136.667 753.121 136.691 753.014C136.709 752.942 136.727 752.87 136.739 752.804C136.745 752.78 136.751 752.756 136.757 752.738C136.769 752.672 136.787 752.612 136.799 752.552C137.066 751.48 137.337 750.408 137.613 749.336C137.613 749.33 137.613 749.33 137.619 749.324C139.67 741.134 142.686 733.217 146.603 725.738C146.723 725.516 146.843 725.289 146.974 725.067C148.788 721.756 150.869 718.599 153.197 715.628C154.477 714.005 155.838 712.447 157.276 710.962C160.997 707.131 165.298 703.909 170.021 701.415C179.436 696.444 190.337 694.539 200.4 697.576C200.658 697.655 200.91 697.733 201.167 697.817Z" fill="#FFB31C"/>
+<path d="M201.108 698.15C188.036 700.745 176.113 707.394 167.035 717.15C165.043 719.216 163.389 721.583 162.135 724.164C160.994 726.717 160.558 729.529 160.872 732.308C161.112 734.908 161.659 737.534 161.264 740.144C161.042 741.477 160.54 742.749 159.793 743.875C159.045 745 158.067 745.956 156.925 746.677C154.125 748.549 150.818 749.303 147.559 749.928C143.94 750.622 140.171 751.286 137.151 753.546C136.785 753.82 136.382 753.236 136.751 752.963C142.005 749.031 149.051 749.856 154.795 747.08C157.477 745.78 159.785 743.673 160.45 740.672C161.031 738.047 160.47 735.336 160.203 732.709C159.857 730.003 160.179 727.252 161.142 724.699C162.261 722.063 163.82 719.636 165.754 717.523C170.029 712.699 175.036 708.577 180.592 705.308C186.914 701.54 193.835 698.881 201.054 697.446C201.501 697.357 201.554 698.066 201.108 698.154V698.15Z" fill="white"/>
+<path d="M169.774 713.839C168.344 712.094 167.58 709.897 167.62 707.641C167.66 705.384 168.501 703.216 169.992 701.522C170.292 701.18 170.84 701.635 170.537 701.977C169.146 703.552 168.363 705.572 168.33 707.673C168.297 709.774 169.017 711.818 170.358 713.435C170.649 713.787 170.064 714.189 169.775 713.835L169.774 713.839Z" fill="white"/>
+<path d="M160.577 731.008C165.164 731.506 169.77 730.256 173.477 727.508C173.844 727.235 174.248 727.819 173.877 728.091C170.016 730.943 165.221 732.235 160.45 731.708C159.995 731.657 160.124 730.959 160.577 731.008Z" fill="white"/>
+<path d="M187.039 702.469C187.452 703.26 188.054 703.935 188.793 704.436C189.531 704.936 190.383 705.245 191.27 705.335C191.725 705.38 191.595 706.078 191.143 706.035C190.163 705.931 189.224 705.588 188.407 705.038C187.59 704.487 186.92 703.744 186.456 702.875C186.406 702.797 186.387 702.702 186.403 702.61C186.42 702.518 186.471 702.436 186.546 702.381C186.623 702.328 186.718 702.307 186.811 702.324C186.903 702.34 186.985 702.392 187.039 702.469Z" fill="white"/>
+<path d="M604.588 706.199C606.575 690.22 616.478 674.477 631.717 669.277C625.706 685.723 625.706 703.766 631.717 720.212C634.059 726.546 637.323 733.347 635.117 739.731C633.747 743.703 630.394 746.742 626.646 748.642C622.898 750.542 618.739 751.448 614.632 752.335L613.824 753.004C607.31 738.281 602.601 722.178 604.588 706.199Z" fill="#FFB31C"/>
+<path d="M631.868 669.579C622.993 679.522 617.477 692.009 616.104 705.266C615.757 708.114 615.862 711 616.415 713.816C617.043 716.542 618.389 719.05 620.315 721.08C622.071 723.009 624.09 724.78 625.346 727.101C625.971 728.299 626.336 729.616 626.417 730.965C626.498 732.314 626.293 733.666 625.815 734.93C624.706 738.111 622.52 740.704 620.294 743.165C617.823 745.898 615.212 748.697 614.162 752.32C614.035 752.759 613.362 752.536 613.488 752.098C615.316 745.798 621.435 742.214 624.353 736.537C625.715 733.888 626.286 730.812 625.01 728.016C623.894 725.571 621.81 723.744 620.019 721.806C618.111 719.854 616.71 717.464 615.939 714.845C615.245 712.066 615.029 709.19 615.301 706.339C615.809 699.909 617.325 693.598 619.794 687.639C622.571 680.823 626.495 674.532 631.394 669.039C631.702 668.708 632.169 669.241 631.868 669.579Z" fill="white"/>
+<path d="M616.295 700.972C614.102 700.439 612.169 699.145 610.843 697.319C609.516 695.494 608.882 693.256 609.053 691.006C609.089 690.551 609.798 690.586 609.762 691.041C609.599 693.136 610.19 695.22 611.429 696.917C612.667 698.615 614.472 699.813 616.517 700.297C616.961 700.403 616.736 701.077 616.295 700.972Z" fill="white"/>
+<path d="M619.291 720.219C623.251 717.854 626.175 714.083 627.479 709.658C627.608 709.22 628.279 709.443 628.153 709.881C626.787 714.483 623.737 718.401 619.61 720.853C619.217 721.087 618.9 720.452 619.291 720.219Z" fill="white"/>
+<path d="M623.232 681.5C624.037 681.882 624.925 682.058 625.815 682.013C626.705 681.968 627.57 681.703 628.332 681.241C628.722 681.003 629.039 681.641 628.651 681.875C627.806 682.382 626.85 682.674 625.866 682.727C624.882 682.779 623.9 682.59 623.006 682.175C622.918 682.143 622.846 682.079 622.804 681.995C622.762 681.912 622.754 681.816 622.78 681.727C622.81 681.638 622.874 681.564 622.958 681.522C623.041 681.479 623.139 681.472 623.228 681.501L623.232 681.5Z" fill="white"/>
+<path d="M678.167 697.817C677.927 697.973 677.688 698.128 677.448 698.29C674.239 700.4 671.206 702.768 668.38 705.37C668.158 705.57 667.937 705.77 667.721 705.97C660.98 712.31 655.474 719.847 651.484 728.197C649.899 731.521 648.57 734.961 647.507 738.487C646.039 743.356 644.836 748.753 641.931 752.736C641.633 753.155 641.309 753.556 640.961 753.936H614.709C614.649 753.906 614.589 753.882 614.529 753.852L613.481 753.9C613.523 753.714 613.571 753.523 613.613 753.337C613.637 753.229 613.667 753.121 613.691 753.014C613.709 752.942 613.727 752.87 613.739 752.804C613.745 752.78 613.751 752.756 613.757 752.738C613.769 752.672 613.787 752.612 613.799 752.552C614.066 751.48 614.337 750.408 614.613 749.336C614.613 749.33 614.613 749.33 614.619 749.324C616.67 741.134 619.686 733.217 623.603 725.738C623.723 725.516 623.842 725.289 623.974 725.067C625.788 721.756 627.869 718.599 630.197 715.628C631.477 714.005 632.838 712.447 634.276 710.962C637.997 707.131 642.298 703.909 647.021 701.415C656.437 696.444 667.337 694.539 677.4 697.576C677.658 697.655 677.91 697.733 678.167 697.817Z" fill="#FFB31C"/>
+<path d="M678.108 698.15C665.036 700.745 653.113 707.393 644.035 717.15C642.043 719.216 640.389 721.583 639.135 724.164C637.994 726.717 637.558 729.529 637.872 732.308C638.112 734.908 638.659 737.534 638.264 740.144C638.042 741.477 637.54 742.748 636.793 743.874C636.045 745 635.067 745.955 633.925 746.677C631.125 748.549 627.818 749.303 624.559 749.928C620.94 750.622 617.171 751.286 614.151 753.546C613.785 753.82 613.382 753.236 613.751 752.963C619.005 749.031 626.051 749.856 631.795 747.08C634.477 745.78 636.785 743.673 637.45 740.672C638.031 738.047 637.47 735.336 637.203 732.709C636.857 730.002 637.179 727.252 638.142 724.699C639.261 722.062 640.82 719.636 642.754 717.523C647.029 712.699 652.036 708.577 657.592 705.308C663.914 701.539 670.835 698.88 678.054 697.446C678.5 697.354 678.552 698.062 678.108 698.15Z" fill="white"/>
+<path d="M646.774 713.839C645.344 712.094 644.58 709.897 644.62 707.641C644.66 705.384 645.501 703.216 646.992 701.522C647.292 701.18 647.84 701.635 647.537 701.977C646.146 703.552 645.363 705.572 645.33 707.673C645.297 709.774 646.017 711.818 647.358 713.435C647.648 713.787 647.063 714.189 646.774 713.839Z" fill="white"/>
+<path d="M637.577 731.008C642.164 731.506 646.771 730.256 650.477 727.508C650.844 727.235 651.248 727.819 650.877 728.091C647.016 730.943 642.221 732.235 637.45 731.708C636.996 731.659 637.125 730.961 637.577 731.008Z" fill="white"/>
+<path d="M664.039 702.469C664.452 703.26 665.054 703.935 665.793 704.436C666.531 704.936 667.383 705.245 668.27 705.335C668.725 705.38 668.595 706.078 668.143 706.035C667.163 705.931 666.224 705.588 665.407 705.038C664.59 704.487 663.92 703.744 663.456 702.875C663.406 702.797 663.387 702.702 663.403 702.61C663.42 702.518 663.471 702.436 663.546 702.381C663.623 702.328 663.718 702.307 663.811 702.324C663.903 702.34 663.985 702.392 664.039 702.469Z" fill="white"/>
+<path d="M315.416 213.008C313.327 211.533 311.042 209.996 308.485 210.057C302.298 210.206 298.963 219.275 292.785 218.957C288.844 218.757 286.227 214.75 282.557 213.298C277.779 211.408 271.699 215.104 271.178 220.216L271.792 219.654C290.364 224.182 309.637 225.072 328.548 222.276L315.416 213.008Z" fill="#F0F0F0"/>
+<path d="M600.416 172.008C598.327 170.533 596.042 168.996 593.485 169.057C587.298 169.206 583.963 178.275 577.785 177.957C573.844 177.757 571.227 173.75 567.557 172.298C562.779 170.408 556.699 174.104 556.178 179.216L556.792 178.654C575.364 183.182 594.637 184.072 613.548 181.276L600.416 172.008Z" fill="#F0F0F0"/>
+<path d="M441.416 339.008C439.327 337.533 437.042 335.996 434.485 336.057C428.298 336.206 424.963 345.275 418.785 344.957C414.844 344.757 412.227 340.75 408.557 339.298C403.779 337.408 397.699 341.104 397.178 346.216L397.792 345.654C416.364 350.182 435.637 351.072 454.548 348.276L441.416 339.008Z" fill="#F0F0F0"/>
+<path d="M756.586 756.616H109.292C109.132 756.62 108.974 756.593 108.825 756.535C108.677 756.478 108.542 756.391 108.427 756.28C108.313 756.169 108.222 756.036 108.16 755.889C108.098 755.742 108.066 755.585 108.066 755.425C108.066 755.266 108.098 755.108 108.16 754.962C108.222 754.815 108.313 754.682 108.427 754.571C108.542 754.46 108.677 754.373 108.825 754.315C108.974 754.258 109.132 754.23 109.292 754.235H756.586C756.895 754.244 757.19 754.373 757.405 754.595C757.621 754.818 757.742 755.115 757.742 755.425C757.742 755.735 757.621 756.033 757.405 756.255C757.19 756.478 756.895 756.607 756.586 756.616Z" fill="#CACACA"/>
+<path d="M477.89 585.384L490.226 574.498L483.872 567.293L471.535 578.177C470.199 578.106 468.862 578.302 467.603 578.753C466.343 579.204 465.186 579.901 464.198 580.804C460.351 584.195 459.513 589.528 462.317 592.71C465.12 595.892 470.517 595.716 474.362 592.333C475.381 591.466 476.217 590.404 476.822 589.211C477.427 588.017 477.788 586.715 477.884 585.38L477.89 585.384Z" fill="#FFB9B9"/>
+<path d="M523.476 514.264L470.188 573.564L482.593 584.714L539.093 529.207" fill="#FFB31C"/>
+<path d="M579.212 712.275L570.809 718.471L577.004 726.875L585.408 720.679L579.212 712.275Z" fill="#FFB9B9"/>
+<path d="M589.604 729.394L571.746 742.562C570.208 743.693 568.437 744.465 566.562 744.822L562.1 745.669C561.608 745.762 561.1 745.703 560.643 745.5C560.187 745.296 559.803 744.958 559.543 744.531C559.283 744.103 559.16 743.607 559.19 743.108C559.22 742.609 559.402 742.13 559.711 741.737L565.118 734.844L572.234 720.169L572.276 720.205C573.304 721.145 574.868 722.558 574.982 722.631C577.182 723.119 578.868 722.844 580 721.821C581.974 720.034 581.574 716.521 581.574 716.491V716.465L581.595 716.45C581.818 716.299 582.072 716.201 582.339 716.164C582.606 716.127 582.877 716.152 583.133 716.237C583.907 716.648 584.494 717.34 584.775 718.17C585.775 718.31 588.386 721.302 588.599 721.541C589.198 721.594 589.78 721.77 590.308 722.057C590.836 722.345 591.3 722.739 591.669 723.214C591.908 723.632 592.055 724.096 592.102 724.574C592.149 725.053 592.094 725.537 591.941 725.993C591.572 727.36 590.747 728.56 589.603 729.393L589.604 729.394Z" fill="#090814"/>
+<path d="M507.154 736.812H496.713V747.253H507.154V736.812Z" fill="#FFB9B9"/>
+<path d="M505.372 756.75H483.18C481.273 756.747 479.392 756.319 477.672 755.496L473.578 753.527C473.127 753.31 472.754 752.961 472.507 752.526C472.26 752.092 472.151 751.592 472.196 751.094C472.24 750.596 472.436 750.124 472.756 749.74C473.076 749.356 473.506 749.078 473.988 748.945L482.43 746.607L496.866 739.018L496.876 739.075C497.148 740.441 497.567 742.509 497.619 742.633C499.099 744.333 500.619 745.111 502.138 744.955C504.787 744.683 506.548 741.625 506.569 741.594L506.584 741.568H506.61C506.879 741.581 507.142 741.654 507.379 741.784C507.616 741.914 507.82 742.096 507.976 742.316C508.352 743.105 508.415 744.007 508.153 744.841C508.875 745.548 509.202 749.506 509.228 749.823C509.679 750.222 510.043 750.708 510.297 751.254C510.552 751.799 510.692 752.391 510.708 752.992C510.651 753.471 510.495 753.932 510.247 754.345C510 754.759 509.668 755.116 509.274 755.392C508.166 756.274 506.79 756.75 505.374 756.743L505.372 756.75Z" fill="#090814"/>
+<path d="M549.745 573.62L500.417 574.006L491.74 739.606H509.355L520.742 664.163L566.425 724.521L583.1 709.428L549.745 664.161V573.62Z" fill="#090814"/>
+<path d="M540.052 551.075L550.301 574.633L500.192 574.753L508.883 552.635L540.052 551.075Z" fill="#FFB9B9"/>
+<path d="M534.005 476.348C534.003 473.211 533.132 470.137 531.489 467.465C529.845 464.794 527.494 462.63 524.695 461.214C521.897 459.798 518.76 459.185 515.635 459.444C512.509 459.703 509.516 460.822 506.988 462.679C504.46 464.535 502.496 467.056 501.314 469.961C500.132 472.867 499.778 476.043 500.292 479.137C500.806 482.231 502.167 485.122 504.224 487.489C506.281 489.857 508.955 491.608 511.947 492.548L515.23 514.231L531.957 500.293C529.676 497.293 527.808 494 526.404 490.503C528.742 488.957 530.661 486.855 531.987 484.385C533.313 481.915 534.006 479.155 534.004 476.352L534.005 476.348Z" fill="#FFB9B9"/>
+<path d="M533.549 493.101L513.561 505.88L504.335 522.171C501.664 526.89 500.762 532.405 501.79 537.729L506.029 559.671H550.229L543.249 513.916C542.355 508.076 540.131 502.52 536.749 497.677L533.549 493.11V493.101Z" fill="#090814"/>
+<path d="M517.752 502.739L530.276 496.827C531.756 496.55 533.277 496.587 534.742 496.935C536.207 497.283 537.582 497.935 538.779 498.848C539.976 499.761 540.968 500.916 541.691 502.236C542.414 503.557 542.852 505.015 542.976 506.515L553.382 580.275H510.882L505.282 553.126L503.724 530.269L517.752 502.739Z" fill="#FFB31C"/>
+<path d="M551.282 614.144L548.306 597.963L538.857 599.698L541.833 615.879C541.084 616.988 540.563 618.234 540.301 619.546C540.039 620.858 540.04 622.21 540.306 623.521C541.231 628.565 545.371 632.03 549.542 631.266C553.713 630.502 556.342 625.785 555.422 620.747C555.204 619.427 554.725 618.163 554.013 617.03C553.302 615.897 552.371 614.917 551.277 614.147L551.282 614.144Z" fill="#FFB9B9"/>
+<path d="M521.663 536.201L537.771 614.278L554.103 610.907L542.961 532.492" fill="#FFB31C"/>
+<path d="M539.456 498.648C539.456 498.648 538.661 504.663 531.321 504.857L516.428 505.257C516.428 505.257 529.02 474.613 523.841 478.068C518.662 481.523 504.859 467.05 504.859 467.05L500.785 474.69C500.785 474.69 491.05 471.168 501.84 462.535C501.84 462.535 514.707 452.587 528.37 458.561C542.033 464.535 539.455 498.654 539.455 498.654L539.456 498.648Z" fill="#090814"/>
+<path d="M476.664 593.999L469.027 599.574C468.569 599.907 467.997 600.046 467.437 599.958C466.877 599.871 466.374 599.565 466.04 599.107L451.931 579.776C451.597 579.318 451.459 578.746 451.546 578.186C451.633 577.626 451.94 577.123 452.397 576.789L460.034 571.214C460.492 570.881 461.064 570.742 461.625 570.83C462.185 570.917 462.687 571.223 463.022 571.681L477.131 591.012C477.465 591.47 477.603 592.042 477.516 592.602C477.428 593.162 477.122 593.665 476.664 593.999Z" fill="#3F3D56"/>
+<path d="M460.34 571.813L459.489 572.434C459.414 572.489 459.363 572.573 459.348 572.665C459.334 572.758 459.357 572.853 459.412 572.929C459.525 573.084 459.572 573.278 459.542 573.468C459.513 573.657 459.409 573.828 459.254 573.941L455.097 576.976C454.942 577.089 454.748 577.136 454.558 577.106C454.368 577.077 454.198 576.973 454.085 576.818C454.029 576.742 453.946 576.692 453.853 576.677C453.76 576.663 453.666 576.686 453.59 576.741L452.84 577.288C452.494 577.542 452.263 577.924 452.197 578.348C452.131 578.773 452.237 579.206 452.49 579.553L466.499 598.747C466.754 599.093 467.135 599.324 467.559 599.39C467.984 599.455 468.417 599.35 468.764 599.097L476.264 593.624C476.61 593.369 476.841 592.988 476.907 592.563C476.972 592.138 476.867 591.705 476.614 591.358L462.604 572.163C462.35 571.817 461.969 571.586 461.544 571.521C461.12 571.455 460.687 571.56 460.34 571.813Z" fill="white"/>
+</svg>`;
+
+        function cardHTML(it, rank){
+          var sb = SEV_BADGE[it.sev];
+          return '<div class="nba-card sev-'+it.sev+'" role="listitem">' +
+            '<div class="nba-rank">'+rank+'</div>' +
+            '<div class="nba-body">' +
+              '<div class="nba-card-head">' +
+                '<div class="nba-pills">' +
+                  '<span class="badge is-neutral is-pill"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;">'+(DOMAIN_ICON[it.domain]||'')+'</svg>'+it.domain+'</span>' +
+                  '<span class="badge '+sb[0]+' is-pill">'+sb[1]+'</span>' +
+                '</div>' +
+                '<div class="nba-cost"><span class="amt">'+it.cost+'</span><span class="lbl">'+it.unit+'</span></div>' +
+              '</div>' +
+              '<div class="nba-title">'+it.title+'</div>' +
+              '<div class="nba-detail">'+(it.delta?'<span class="delta '+it.dir+'">'+it.delta+'</span><span class="sep" style="color:var(--border-strong)">·</span>':'')+'<span>'+it.ctx+'</span><span style="flex:1"></span>'+spark(it.spark, it.sev)+'</div>' +
+              '<div class="nba-rec"><span class="rec-ic"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span><span><strong>Recommended:</strong> '+it.rec+'</span></div>' +
+              '<div class="nba-actions">' +
+                '<div class="assign-wrap">' +
+                  '<button class="btn btn-soft is-sm" data-assign-btn><svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg> Assign to <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>' +
+                  '<div class="assign-menu" data-assign-menu hidden><div class="am-head">Assign to</div>'+userOptsHTML()+'</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }
+
+        var USERS = [
+          { name:'Priya Menon',   role:'Regional VP',      init:'PM', color:'var(--blue-9)' },
+          { name:'Marcus Lee',    role:'Sales Director',   init:'ML', color:'var(--green-9)' },
+          { name:'Dana Cole',     role:'Care Lead',        init:'DC', color:'#8e4ec6' },
+          { name:'Tom Alvarez',   role:'Ops Manager',      init:'TA', color:'var(--orange-9)' },
+          { name:'Sumit Awinash', role:'You',              init:'SA', color:'var(--accent-9)' }
+        ];
+        function userOptsHTML(){
+          return USERS.map(function(u,i){ return '<button class="am-opt" data-assign-user="'+i+'"><span class="am-av" style="background:'+u.color+'">'+u.init+'</span><span class="am-meta"><span class="am-name">'+u.name+'</span><span class="am-role">'+u.role+'</span></span></button>'; }).join('');
+        }
+
+        var listEl = document.getElementById('nbaList');
+        var lensEl = view.querySelector('[data-nba-lens]');
+        var sumEl = view.querySelector('[data-nba-summary]');
+        var current = 'today';
+        var SEV_WEIGHT = { critical:3, watch:2, info:1 };
+        function costValue(c){
+          var m = String(c).replace(/[^0-9.]/g,''); var n = parseFloat(m); if (isNaN(n)) return 0;
+          if (/M/i.test(c)) return n * 1e6; if (/K/i.test(c)) return n * 1e3; return n;
+        }
+        function priScore(it){ return SEV_WEIGHT[it.sev] * 1e12 + costValue(it.cost); }
+
+        /* toast */
+        var toastEl; var toastTimer;
+        function toast(msg){
+          if (!toastEl){ toastEl = document.createElement('div'); toastEl.className = 'nba-toast'; document.body.appendChild(toastEl); }
+          toastEl.innerHTML = '<span class="tk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>' + msg;
+          toastEl.classList.add('is-open'); clearTimeout(toastTimer); toastTimer = setTimeout(function(){ toastEl.classList.remove('is-open'); }, 2600);
+        }
+
+        function render(){
+          var items = DATA[current];
+          lensEl.textContent = LENS[current];
+          if (!items.length){
+            sumEl.innerHTML = '<span>You’re all caught up · nothing at stake right now</span>';
+            listEl.innerHTML = '<div class="nba-empty">' + EMPTY_ART +
+              '<h3>Nothing needs your attention right now.</h3>' +
+              '<p>When a metric moves against you, it’ll show up here with a way to act on it.</p>' +
+              '<div class="ne-hint">Set a goal on the right and this tab will also track pace against your own target.</div>' +
+            '</div>';
+            return;
+          }
+          items.sort(function(a,b){ return priScore(b) - priScore(a); });
+          sumEl.innerHTML = '<strong>'+items.length+(items.length===1?' action':' actions')+'</strong><span class="sep">·</span><span>'+SUMMARY[current][1]+'</span>';
+          listEl.innerHTML = items.map(function(it,i){ return cardHTML(it, i+1); }).join('');
+        }
+
+        /* horizon tabs */
+        view.querySelectorAll('[data-nba-tab]').forEach(function(t){
+          t.addEventListener('click', function(e){ e.preventDefault();
+            view.querySelectorAll('[data-nba-tab]').forEach(function(x){ x.classList.remove('is-active'); });
+            t.classList.add('is-active'); current = t.getAttribute('data-nba-tab'); closeAssign(); render();
+          });
+        });
+
+        function closeAssign(){ listEl.querySelectorAll('[data-assign-menu]').forEach(function(m){ m.hidden = true; }); }
+
+        /* card actions (delegated) — single "Assign to" CTA */
+        listEl.addEventListener('click', function(e){
+          var btn = e.target.closest('[data-assign-btn]');
+          if (btn){
+            var menu = btn.parentNode.querySelector('[data-assign-menu]');
+            var wasHidden = menu.hidden; closeAssign(); menu.hidden = !wasHidden; return;
+          }
+          var opt = e.target.closest('[data-assign-user]');
+          if (opt){
+            var card = opt.closest('.nba-card'); var idx = Array.prototype.indexOf.call(listEl.children, card);
+            var u = USERS[+opt.getAttribute('data-assign-user')];
+            if (idx > -1){ DATA[current].splice(idx, 1); render(); }
+            toast('Assigned to <strong style="color:#fff">'+u.name+'</strong> · added to '+(u.role==='You'?'your':u.name.split(' ')[0]+'’s')+' tasks');
+            return;
+          }
+        });
+        document.addEventListener('click', function(e){ if (!e.target.closest('.assign-wrap')) closeAssign(); });
+
+        /* ---------- My goals ---------- */
+        var METRICS = [
+          ['Financial', ['Revenue','Expenses','NOI','Budget Revenue','Budget Expenses']],
+          ['Labor', ['Active Staff','Hours','OT Hours','Labor Expense']],
+          ['Marketing', ['New Leads','Tours','Move-Ins','Move-Outs','Net MIMO']],
+          ['Occupancy', ['Total Occupied','Total Units','Occupancy Rate','Units Vacant']]
+        ];
+        var goalsBody = view.querySelector('[data-goals-body]');
+        var goalToggle = view.querySelector('[data-goal-toggle]');
+        var goals = [];
+        try { goals = JSON.parse(localStorage.getItem('skycmd.nba.goals') || '[]'); } catch(e){ goals = []; }
+        var formOpen = false, selMetric = '';
+
+        function saveGoals(){ try { localStorage.setItem('skycmd.nba.goals', JSON.stringify(goals)); } catch(e){} }
+
+        function goalsView(){
+          goalToggle.innerHTML = formOpen ? 'Cancel' : '<svg class="btn-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg> Set a goal';
+          if (formOpen){
+            var opts = METRICS.map(function(g){ return '<div class="mx-group">'+g[0]+'</div>' + g[1].map(function(m){ return '<button class="mx-opt'+(m===selMetric?' is-selected':'')+'" data-mx-opt="'+m+'">'+m+'</button>'; }).join(''); }).join('');
+            goalsBody.innerHTML =
+              '<div class="goal-form">' +
+                '<div><span class="field-label">Metric</span>' +
+                  '<div class="mx-select">' +
+                    '<button class="mx-btn'+(selMetric?'':' is-placeholder')+'" data-mx-btn><span class="mx-val">'+(selMetric||'Choose a metric')+'</span><svg class="mx-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>' +
+                    '<div class="mx-menu" data-mx-menu hidden>'+opts+'</div>' +
+                  '</div>' +
+                  '<span class="field-hint">Only metrics you can already see. A goal never widens your access.</span>' +
+                '</div>' +
+                '<div><span class="field-label">Target</span>' +
+                  '<div class="row2"><input class="nba-num" type="number" inputmode="numeric" placeholder="e.g. 250" data-goal-target />' +
+                  '<div class="mx-select"><button class="mx-btn" data-cad-btn><span class="mx-val" data-cad-val>month</span><svg class="mx-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>' +
+                  '<div class="mx-menu" data-cad-menu hidden>'+['day','week','month','quarter'].map(function(c){ return '<button class="mx-opt" data-cad-opt="'+c+'">'+c+'</button>'; }).join('')+'</div></div></div>' +
+                '</div>' +
+                '<button class="btn btn-solid is-sm" data-goal-save style="align-self:flex-start;">Set goal</button>' +
+                '<span class="field-hint">Your goal is yours alone — nobody else sees it, and it doesn’t change the budget this tab reports against.</span>' +
+              '</div>';
+          } else if (goals.length){
+            goalsBody.innerHTML = '<div class="goal-list">' + goals.map(function(g,i){ return '<div class="goal-chip"><span class="gc-metric">'+g.metric+'</span><span class="gc-target">'+g.target+' / '+g.cad+'</span><button class="gc-x" data-goal-del="'+i+'" aria-label="Remove goal"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>'; }).join('') + '</div>';
+          } else {
+            goalsBody.innerHTML = '<p class="goals-empty">Set your own number and this tab works backwards from it — what you need upstream to hit it, using your historical conversion rates.</p>';
+          }
+        }
+
+        var cad = 'month';
+        goalToggle.addEventListener('click', function(){ formOpen = !formOpen; if (formOpen){ selMetric=''; cad='month'; } goalsView(); });
+        goalsBody.addEventListener('click', function(e){
+          var mxBtn = e.target.closest('[data-mx-btn]');
+          if (mxBtn){ var m = goalsBody.querySelector('[data-mx-menu]'); m.hidden = !m.hidden; var cm=goalsBody.querySelector('[data-cad-menu]'); if(cm) cm.hidden=true; return; }
+          var opt = e.target.closest('[data-mx-opt]');
+          if (opt){ selMetric = opt.getAttribute('data-mx-opt'); goalsView(); return; }
+          var cadBtn = e.target.closest('[data-cad-btn]');
+          if (cadBtn){ var cm2 = goalsBody.querySelector('[data-cad-menu]'); cm2.hidden = !cm2.hidden; var mm=goalsBody.querySelector('[data-mx-menu]'); if(mm) mm.hidden=true; return; }
+          var cadOpt = e.target.closest('[data-cad-opt]');
+          if (cadOpt){ cad = cadOpt.getAttribute('data-cad-opt'); goalsBody.querySelector('[data-cad-val]').textContent = cad; goalsBody.querySelector('[data-cad-menu]').hidden = true; return; }
+          var save = e.target.closest('[data-goal-save]');
+          if (save){
+            var tv = goalsBody.querySelector('[data-goal-target]').value.trim();
+            if (!selMetric || !tv){ if(!selMetric){ var b=goalsBody.querySelector('[data-mx-btn]'); if(b) b.style.borderColor='var(--red-8)'; } return; }
+            goals.push({ metric:selMetric, target:tv, cad:cad }); saveGoals(); formOpen = false; goalsView(); return;
+          }
+          var del = e.target.closest('[data-goal-del]');
+          if (del){ goals.splice(+del.getAttribute('data-goal-del'), 1); saveGoals(); goalsView(); return; }
+        });
+        document.addEventListener('click', function(e){
+          if (!e.target.closest('.mx-select')){ goalsBody.querySelectorAll('.mx-menu').forEach(function(m){ m.hidden = true; }); }
+        });
+
+        render();
+        goalsView();
       })();
 
     })();
